@@ -23,7 +23,7 @@ class Engine
     SDL_Window* window;
 
     Game game;
-    Renderer renderer;
+    Renderer* renderer;
 
     enum GameState {
 

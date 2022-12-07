@@ -12,10 +12,16 @@ Engine::Engine()
                                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                     WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
-    if (window != nullptr)
+
+    if (window == nullptr)
     {
-        this->state = GameState::Running;
+        // To-do: create custom exception
+        ;
     }
+
+    this->renderer = new Renderer(this->window);
+
+    this->state = GameState::Running;
 
 }
 
