@@ -15,7 +15,7 @@ struct Coordinate
 
     Point module() const
     {
-        return sqrt(x*x + y*y + z*z);
+        return sqrt(this->energy());
     }
 
     Point energy() const
