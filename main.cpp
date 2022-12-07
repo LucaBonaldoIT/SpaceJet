@@ -1,4 +1,6 @@
 #include <iostream>
+#include "ObjectModels/Space.hpp"
+#include "ObjectModels/Square.hpp"
 
 #include <SDL2/SDL.h>
 
@@ -35,8 +37,12 @@ int main(int argc, char * argv[])
 	SDL_Rect rect = {0, 0, 100, 100}; // x, y, width, height
     SDL_FillRect(screenSurface, &rect, SDL_MapRGB(screenSurface->format, 0x00, 0x00, 0x255));
 
-            SDL_UpdateWindowSurface(window);
+    SDL_UpdateWindowSurface(window);
 
+
+	Space* space = new Space();
+
+	space->addNode(new Square(), Coordinate(0, 0, 0));
 
 	while(running)
 	{
