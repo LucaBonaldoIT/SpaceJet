@@ -19,8 +19,9 @@ Engine::Engine()
         ;
     }
 
-    this->renderer = new Renderer(this->window);
 
+    // Setup renderer and set running state
+    this->renderer = new Renderer(this->window);
     this->state = GameState::Running;
 
 }
@@ -38,6 +39,12 @@ void Engine::processEvent(SDL_Event* event)
 
 void Engine::updatePhysics()
 {
+    for (auto it = nodes.begin(); it != nodes.end(); it++)
+    {
+        // Update each node physics
+        Node* current = *it;
+        current->updateNodePhysics();
+    }
 }
 
 void Engine::renderFrame()

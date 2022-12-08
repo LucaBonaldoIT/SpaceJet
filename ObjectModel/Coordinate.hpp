@@ -13,18 +13,18 @@ struct Coordinate
 
     public:
 
-    Point module() const
+    inline Point module() const
     {
         return sqrt(this->energy());
     }
 
-    Point energy() const
+    inline Point energy() const
     {
         return x*x + y*y + z*z;
     }
 
 
-    friend bool operator< (Coordinate const& c0, Coordinate const& c1)
+    inline friend bool operator< (Coordinate const& c0, Coordinate const& c1)
     {
         return c0.energy() < c1.energy();
     }

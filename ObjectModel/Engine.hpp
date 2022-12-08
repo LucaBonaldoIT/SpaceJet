@@ -3,6 +3,8 @@
 
 #include "Game.hpp"
 #include "Renderer.hpp"
+#include "Node.hpp"
+#include <vector>
 
 class Engine
 {
@@ -24,6 +26,8 @@ class Engine
 
     Game game;
     Renderer* renderer;
+
+    std::vector<Node*> nodes;
 
     enum GameState {
 

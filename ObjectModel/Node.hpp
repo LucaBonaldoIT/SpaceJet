@@ -8,8 +8,9 @@ struct SpriteInfo
 
 class Node
 {
-
-    virtual SpriteInfo getSpriteInfo();
+    public:
+        virtual SpriteInfo getSpriteInfo() = 0;
+        virtual void updateNodePhysics() = 0;
 
 };
 
