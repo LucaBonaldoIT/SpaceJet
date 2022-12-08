@@ -6,6 +6,7 @@ Renderer::SpriteList::SpriteList()
         this->spriteIds.push_back(entry.path());
 }
 
+
 SDL_Texture* Renderer::loadTextureFromFile(SDL_Renderer *renderer, const char *file)
 {
     SDL_Texture *texture = nullptr;

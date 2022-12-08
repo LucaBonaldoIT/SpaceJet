@@ -15,7 +15,7 @@ class Renderer
 
     class SpriteList
     {
-        static std::vector<std::string> spriteIds;
+        std::vector<std::string> spriteIds;
         
         public:
         const std::string DEFAULT_SPRITES_PATH = "./sprites/";
