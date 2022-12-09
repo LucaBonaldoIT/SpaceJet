@@ -15,13 +15,14 @@ Engine::Engine()
 
     if (window == nullptr)
     {
-        // To-do: create custom exception
-        ;
+        throw WindowNotIstantiatedException("Window not istantiated in Engine's constructor.");
+        return;
     }
 
 
     // Setup renderer and set running state
     this->renderer = new Renderer(this->window);
+    SDL_Log("Renderer istantiated.");
     this->state = GameState::Running;
 
 }
@@ -55,3 +56,4 @@ bool Engine::isRunning()
 {
     return this->state == GameState::Running;
 }
+

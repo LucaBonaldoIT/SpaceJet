@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include <thread>
 
+
 void loop()
 {
 
@@ -17,9 +18,12 @@ int main(int argc, char * argv[])
 {
 
 	Engine engine = Engine();
+	SDL_Log("Engine istantiated.");
 
 	SDL_Event* event;
 
+	
+	SDL_Log("Engine is runnning.");
 	while(engine.isRunning())
 	{
 
@@ -32,6 +36,7 @@ int main(int argc, char * argv[])
 		engine.renderFrame();
 
 	}
+	SDL_Log("Engine stopped running.");
 
 	//std::thread gameLoop = std::thread(loop);
 
