@@ -4,6 +4,10 @@
 struct SpriteInfo
 {
     const char* id;
+
+    SpriteInfo(const char* id) : id{id}
+    {}
+
 };
 
 class Node

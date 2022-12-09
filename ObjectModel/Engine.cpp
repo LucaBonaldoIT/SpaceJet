@@ -1,9 +1,40 @@
 #include "Engine.hpp"
 
-Engine::Initializer::Initializer()
+#include <iostream>
+
+Engine* Engine::initialize()
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
+
+    Logger::log("Initializing SDL2...");
+
+    auto err = SDL_Init(SDL_INIT_EVERYTHING);
+
+    if (err == 0)
+    {
+        Logger::log("SDL2 initialized...");
+        return nullptr;
+    }
+
+    Logger::log("Initializing SDL2...");
+
+    Engine::state = EngineState::EngineInitialized;
+
+    return this;
+
 }
+
+Engine* Engine::getInstance()
+{
+    if (Engine::state == EngineState::EngineInitialized)
+    {
+        return Engine::instance;
+    }
+
+    Engine::instance = (new Engine())->initialize();
+
+    return Engine::instance;
+}
+
 
 Engine::Engine()
 {
@@ -13,6 +44,11 @@ Engine::Engine()
                                     WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
 
+    Engine::nodes = std::vector<Node*>({
+        new Square(),
+        new Square()
+    });
+
     if (window == nullptr)
     {
         throw WindowNotIstantiatedException("Window not istantiated in Engine's constructor.");
@@ -21,9 +57,9 @@ Engine::Engine()
 
 
     // Setup renderer and set running state
-    this->renderer = new Renderer(this->window);
-    SDL_Log("Renderer istantiated.");
-    this->state = GameState::Running;
+    this->renderer = Renderer::getInstance(this->window);
+    Logger::log("Renderer istantiated.");
+    Engine::state = EngineState::EngineRunning;
 
 }
 
@@ -35,25 +71,30 @@ Engine::~Engine()
 
 void Engine::processEvent(SDL_Event* event)
 {
-    this->state = event->type == SDL_QUIT ? GameState::Closing : GameState::Running;
+    Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
 }
 
 void Engine::updatePhysics()
 {
-    for (auto it = nodes.begin(); it != nodes.end(); it++)
+
+    Logger::log("Physics update...");
+
+    for (auto it = Engine::nodes.begin(); it != Engine::nodes.end(); it++)
     {
         // Update each node physics
         Node* current = *it;
         current->updateNodePhysics();
+        Logger::log("QUA");
     }
 }
 
 void Engine::renderFrame()
 {
+    Logger::log("Rendering next frame...");
 }
 
 bool Engine::isRunning()
 {
-    return this->state == GameState::Running;
+    return Engine::state == EngineState::EngineRunning;
 }
 

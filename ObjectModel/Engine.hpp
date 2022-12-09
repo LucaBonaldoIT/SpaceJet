@@ -4,7 +4,19 @@
 #include "Game.hpp"
 #include "Renderer.hpp"
 #include "Node.hpp"
+#include "Logger.hpp"
+#include "Square.hpp"
 #include <vector>
+
+enum EngineState {
+
+    EngineError = -1,
+    EngineUninitialized = 0,
+    EngineInitialized = 1,
+    EngineRunning = 2,
+    EngineClosing = 3,
+
+};
 
 class Engine
 {
@@ -16,31 +28,26 @@ class Engine
     const int WINDOW_WIDTH = 1280;
     const int WINDOW_HEIGHT = 720;
 
-    static class Initializer
-    {
-        public:
-        Initializer();
-    } INITIALIZER;
+    Engine* initialize();
 
     SDL_Window* window;
 
     Game game;
     Renderer* renderer;
 
-    std::vector<Node*> nodes;
+    static inline std::vector<Node*> nodes;
 
-    enum GameState {
+    static inline EngineState state;
 
-        Running = 0,
-        Closing = 1,
+    Engine();
 
-    } state;
+    static inline Engine* instance;
 
     public:
 
-
-    Engine();
     ~Engine();
+
+    static Engine* getInstance();
 
     void processEvent(SDL_Event*);
 
@@ -58,6 +65,16 @@ class WindowNotIstantiatedException : public std::exception
 
     public:
         WindowNotIstantiatedException(char * msg) : message(msg){}
+        char* what () {return message;}
+};
+
+class EngineNotIstantiatedException : public std::exception 
+{
+    private:
+        char * message;
+
+    public:
+        EngineNotIstantiatedException(char * msg) : message(msg){}
         char* what () {return message;}
 };
 

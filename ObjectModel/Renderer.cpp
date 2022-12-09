@@ -20,16 +20,59 @@ SDL_Texture* Renderer::loadTextureFromFile(SDL_Renderer *renderer, const char *f
 
 void Renderer::loadSprites()
 {
-    for(auto sprite : spriteList.getSpriteIds())
+    for(const auto & sprite : spriteList.getSpriteIds())
     {
         this->sprites.insert({sprite, loadTextureFromFile(this->renderer, spriteList.getSpritePath(sprite).c_str())});
     }
 }
 
 Renderer::Renderer()
-{}
+{
+    Renderer::rendererState = RendererState::RendererError;
+}
 
 Renderer::Renderer(SDL_Window* window)
 {
     this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    rendererState = this->renderer == nullptr ? RendererState::RendererError : RendererState::RendererInitialized;
+}
+
+Renderer* Renderer::initialize()
+{
+    Renderer::rendererState = RendererState::RendererInitialized;
+
+    this->loadSprites();
+
+    return this;
+}
+
+
+Renderer* Renderer::getInstance(SDL_Window* window)
+{
+    if(Renderer::rendererState != RendererState::RendererUninitialized)
+    {
+        Logger::log("Error! Already initialized!");
+        return nullptr;
+    }
+
+    Renderer::instance = (new Renderer(window))->initialize();
+
+    return Renderer::instance;
+
+}
+
+Renderer* Renderer::getInstance()
+{
+    if(Renderer::rendererState == RendererState::RendererUninitialized)
+    {
+        Logger::log("Error! Uninitialized!");
+    }
+
+    return Renderer::instance;
+
+}
+
+RendererState Renderer::getState()
+{
+    return Renderer::rendererState;
 }

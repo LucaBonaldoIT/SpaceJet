@@ -8,8 +8,12 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
+                "ObjectModel/*.cpp",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-w",
+                "-lSDL2",
+                "-lSDL2_image"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -35,7 +39,8 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-w",
-                "-lSDL2"
+                "-lSDL2",
+                "-lSDL2_image"
             ],
             "options": {
                 "cwd": "${fileDirname}"
