@@ -9,7 +9,11 @@ class Square : public Node
         {
             return SpriteInfo("minion");
         };
-        void updateNodePhysics()
+        void updatePhysics()
+        {
+            return;
+        };
+        void applyForce()
         {
             return;
         };

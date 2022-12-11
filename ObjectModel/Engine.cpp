@@ -79,7 +79,7 @@ void Engine::updatePhysics()
     {
         // Update each node physics
         Node* current = *it;
-        current->updateNodePhysics();
+        current->updatePhysics();
     }
 }
 

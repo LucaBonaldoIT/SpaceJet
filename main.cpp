@@ -1,6 +1,5 @@
 #include <iostream>
 #include "ObjectModel/Logger.hpp"
-#include "ObjectModel/Space.hpp"
 #include "ObjectModel/Square.hpp"
 #include "ObjectModel/Engine.hpp"
 

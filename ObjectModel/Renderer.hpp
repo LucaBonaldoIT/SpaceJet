@@ -3,6 +3,8 @@
 
 #include "Logger.hpp"
 #include "Node.hpp"
+#include "Vector3d.hpp"
+#include "Vector2d.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -52,6 +54,8 @@ class Renderer
     Renderer(SDL_Window*);
 
     static inline Renderer* instance;
+
+    Vector2d projectVector(Vector3d);
 
     public:
 

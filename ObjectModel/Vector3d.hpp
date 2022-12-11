@@ -1,17 +1,15 @@
-#ifndef COORDINATE_H
-#define COORDINATE_H
+#ifndef VECTOR_3D_H
+#define VECTOR_3D_H
 
 #include <cmath>
 
 typedef float Point;
 
-struct Coordinate
+struct Vector3d
 {
     Point x;
     Point y;
     Point z;
-
-    public:
 
     inline Point module() const
     {
@@ -23,13 +21,11 @@ struct Coordinate
         return x*x + y*y + z*z;
     }
 
-
-    inline friend bool operator< (Coordinate const& c0, Coordinate const& c1)
+    Vector3d() : x{Point()}, y{Point()}, z{Point()}
     {
-        return c0.energy() < c1.energy();
     }
 
-    Coordinate(Point _x, Point _y, Point _z) : x{_x}, y{_y}, z{_z}
+    Vector3d(Point _x, Point _y, Point _z) : x{_x}, y{_y}, z{_z}
     {
     }
 
