@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include "Logger.hpp"
+#include "Node.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -28,9 +29,10 @@ class Renderer
         
         public:
         const std::string DEFAULT_SPRITES_PATH = "./sprites/";
+        const std::string DEFAULT_FILE_EXT = ".png";
         SpriteList();
         std::vector<std::string> getSpriteIds() {return this->spriteIds;};
-        std::string getSpritePath(std::string sprite) {return this->DEFAULT_SPRITES_PATH + sprite;}
+        std::string getSpritePath(std::string sprite) {return DEFAULT_SPRITES_PATH + sprite + DEFAULT_FILE_EXT;}
 
     } spriteList;
 
@@ -57,6 +59,10 @@ class Renderer
 
     static Renderer* getInstance(SDL_Window*);
     static Renderer* getInstance();
+
+    void clear();
+    void draw(std::vector<Node*>);
+    void update();
 
     RendererState getState();
 

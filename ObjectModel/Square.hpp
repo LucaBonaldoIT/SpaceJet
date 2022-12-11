@@ -7,7 +7,7 @@ class Square : public Node
 {
         SpriteInfo getSpriteInfo()
         {
-            return SpriteInfo("Square!");
+            return SpriteInfo("minion");
         };
         void updateNodePhysics()
         {

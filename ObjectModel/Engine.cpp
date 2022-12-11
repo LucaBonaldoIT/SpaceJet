@@ -45,7 +45,6 @@ Engine::Engine()
 
 
     Engine::nodes = std::vector<Node*>({
-        new Square(),
         new Square()
     });
 
@@ -76,21 +75,21 @@ void Engine::processEvent(SDL_Event* event)
 
 void Engine::updatePhysics()
 {
-
-    Logger::log("Physics update...");
-
     for (auto it = Engine::nodes.begin(); it != Engine::nodes.end(); it++)
     {
         // Update each node physics
         Node* current = *it;
         current->updateNodePhysics();
-        Logger::log("QUA");
     }
 }
 
 void Engine::renderFrame()
 {
-    Logger::log("Rendering next frame...");
+
+    this->renderer->getInstance()->clear();
+    this->renderer->getInstance()->draw(this->nodes);
+    this->renderer->getInstance()->update();
+
 }
 
 bool Engine::isRunning()

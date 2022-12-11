@@ -3,7 +3,9 @@
 Renderer::SpriteList::SpriteList()
 {
     for (const auto & entry : std::filesystem::directory_iterator(DEFAULT_SPRITES_PATH))
-        this->spriteIds.push_back(entry.path());
+    {
+        this->spriteIds.push_back(entry.path().filename().replace_extension());
+    }
 }
 
 
@@ -14,6 +16,7 @@ SDL_Texture* Renderer::loadTextureFromFile(SDL_Renderer *renderer, const char *f
     if (surface) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
+        Logger::log("Caricata!");
     }
     return texture;
 }
@@ -22,7 +25,11 @@ void Renderer::loadSprites()
 {
     for(const auto & sprite : spriteList.getSpriteIds())
     {
-        this->sprites.insert({sprite, loadTextureFromFile(this->renderer, spriteList.getSpritePath(sprite).c_str())});
+        this->sprites.insert({
+            sprite,
+            loadTextureFromFile(this->renderer,
+                                spriteList.getSpritePath(sprite).c_str())
+        });
     }
 }
 
@@ -33,7 +40,9 @@ Renderer::Renderer()
 
 Renderer::Renderer(SDL_Window* window)
 {
-    this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    this->renderer = SDL_CreateRenderer(window,
+                                        -1,
+                                        SDL_RENDERER_ACCELERATED);
     rendererState = this->renderer == nullptr ? RendererState::RendererError : RendererState::RendererInitialized;
 }
 
@@ -75,4 +84,26 @@ Renderer* Renderer::getInstance()
 RendererState Renderer::getState()
 {
     return Renderer::rendererState;
+}
+
+void Renderer::clear()
+{
+    SDL_RenderClear(this->renderer);
+}
+
+void Renderer::draw(std::vector<Node*> nodes)
+{
+    for(const auto & node : nodes) 
+    {
+        SDL_RenderCopy(this->renderer,
+                       this->sprites.at(node->getSpriteInfo().id),
+                       nullptr,
+                       nullptr);
+    }
+    
+}
+
+void Renderer::update()
+{
+    SDL_RenderPresent(this->renderer);
 }
