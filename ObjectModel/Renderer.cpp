@@ -95,10 +95,20 @@ void Renderer::draw(std::vector<Node*> nodes)
 {
     for(const auto & node : nodes) 
     {
+        SDL_Rect rect;
+
+        rect.x = node->getPosition().x;
+        rect.y = node->getPosition().y;
+
+        SDL_QueryTexture(this->sprites.at(node->getSpriteInfo().id), NULL, NULL, &rect.w, &rect.h);
+
+        rect.w /= 3;
+        rect.h /= 3;
+
         SDL_RenderCopy(this->renderer,
                        this->sprites.at(node->getSpriteInfo().id),
                        nullptr,
-                       nullptr);
+                       &rect);
     }
     
 }

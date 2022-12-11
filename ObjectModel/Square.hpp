@@ -5,18 +5,11 @@
 
 class Square : public Node
 {
-        SpriteInfo getSpriteInfo()
+    public:
+        Square()
         {
-            return SpriteInfo("minion");
-        };
-        void updatePhysics()
-        {
-            return;
-        };
-        void applyForce()
-        {
-            return;
-        };
+            this->spriteInfo = SpriteInfo("minion");
+        }
 };
 
 #endif

@@ -71,6 +71,28 @@ Engine::~Engine()
 void Engine::processEvent(SDL_Event* event)
 {
     Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
+
+    if (event->type = SDL_KEYDOWN)
+    {
+        switch (event->key.keysym.sym)
+        {
+        case SDLK_d:
+            this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
+            break;
+        case SDLK_w:
+            this->nodes.at(0)->applyForce(Vector3d(0, -0.00001, 0));
+            break;
+        case SDLK_a:
+            this->nodes.at(0)->applyForce(Vector3d(-0.00001, 0, 0));
+            break;
+        case SDLK_s:
+            this->nodes.at(0)->applyForce(Vector3d(0, 0.00001, 0));
+            break;
+        default:
+            break;
+        }
+    }
+
 }
 
 void Engine::updatePhysics()
@@ -79,7 +101,7 @@ void Engine::updatePhysics()
     {
         // Update each node physics
         Node* current = *it;
-        current->updatePhysics();
+        current->updatePhysics(0.0f);
     }
 }
 

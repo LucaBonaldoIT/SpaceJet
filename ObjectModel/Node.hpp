@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include "Vector3d.hpp"
+#include "DeltaTime.hpp"
 
 typedef float Mass;
 
@@ -12,11 +13,15 @@ struct SpriteInfo
     SpriteInfo(const char* id) : id{id}
     {}
 
+    SpriteInfo() : id{"default"}
+    {
+    }
+
 };
 
 class Node
 {
-    private:
+    protected:
         Vector3d position;
         Vector3d velocity;
         Vector3d acceleration;
@@ -24,10 +29,16 @@ class Node
 
         Mass mass;
 
+        SpriteInfo spriteInfo;
+
     public:
-        virtual SpriteInfo getSpriteInfo() = 0;
-        virtual void updatePhysics() = 0;
-        virtual void applyForce() = 0;
+
+        Node();
+
+        SpriteInfo getSpriteInfo();
+        void updatePhysics(DeltaTime);
+        void applyForce(Vector3d);
+        Vector3d getPosition();
 };
 
 #endif

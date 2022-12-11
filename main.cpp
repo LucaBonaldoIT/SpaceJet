@@ -3,6 +3,8 @@
 #include "ObjectModel/Square.hpp"
 #include "ObjectModel/Engine.hpp"
 #include "ObjectModel/Tensor.hpp"
+#include "ObjectModel/Vector3d.hpp"
+#include "ObjectModel/Vector2d.hpp"
 
 #include <SDL2/SDL.h>
 #include <thread>
