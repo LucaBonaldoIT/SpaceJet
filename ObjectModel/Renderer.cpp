@@ -4,7 +4,7 @@ Renderer::SpriteList::SpriteList()
 {
     for (const auto & entry : std::filesystem::directory_iterator(DEFAULT_SPRITES_PATH))
     {
-        this->spriteIds.push_back(entry.path().filename().replace_extension());
+        this->spriteIds.push_back(entry.path().filename().replace_extension()); // replace_extension removes extension
     }
 }
 
@@ -16,7 +16,6 @@ SDL_Texture* Renderer::loadTextureFromFile(SDL_Renderer *renderer, const char *f
     if (surface) {
         texture = SDL_CreateTextureFromSurface(renderer, surface);
         SDL_FreeSurface(surface);
-        Logger::log("Caricata!");
     }
     return texture;
 }
@@ -25,6 +24,7 @@ void Renderer::loadSprites()
 {
     for(const auto & sprite : spriteList.getSpriteIds())
     {
+        // Insert all sprites in sprites map (id, SDL_Texture*)
         this->sprites.insert({
             sprite,
             loadTextureFromFile(this->renderer,

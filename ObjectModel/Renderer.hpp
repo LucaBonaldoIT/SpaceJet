@@ -5,6 +5,7 @@
 #include "Node.hpp"
 #include "Vector3d.hpp"
 #include "Vector2d.hpp"
+#include "Tensor.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
