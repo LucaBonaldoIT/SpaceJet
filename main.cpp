@@ -19,6 +19,8 @@ int main(int argc, char * argv[])
 	t1.at(1,1)=5;
 	t1.at(1,2)=6;
 	Logger::log(t1.toString());
+	Logger::log(t1.transposed().toString());
+	Logger::log("\n");
 	Tensor t2(3, 2);
 	t2.at(0,0)=10;
 	t2.at(0,1)=11;
@@ -27,8 +29,20 @@ int main(int argc, char * argv[])
 	t2.at(2,0)=30;
 	t2.at(2,1)=31;
 	Logger::log(t2.toString());
+	Logger::log(t2.transposed().toString());
+	Logger::log("\n");
+
 	Tensor p = t1*t2;
 	Logger::log(p.toString());
+
+	Logger::log(p.transposed().toString());
+	Logger::log((p*10).toString());
+	Logger::log("here");
+
+	p.resize(3, 1);
+	Logger::log(p.toString());
+
+	return 0;
 
 	Engine* engine = Engine::getInstance();
 

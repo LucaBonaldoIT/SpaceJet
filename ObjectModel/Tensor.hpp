@@ -21,17 +21,26 @@ class Tensor
         Tensor(size_t, size_t);
         TensorSize getSize(){return TensorSize(rows, columns);}
         std::string toString();
+        Tensor transposed();
+        void resize(size_t new_rows, size_t new_columns);
+        Tensor operator*(const Tensor& other)  const;
         Tensor operator*(const Tensor& other);
-        Point& at(size_t row, size_t column){return tensor.at(row).at(column);}
+        Tensor operator+(const Tensor& other) const;
+        Tensor operator+(const Tensor& other);
+        Tensor operator*(const Point& other) const;
+        Tensor operator*(const Point& other);
+
+        Point at(size_t row, size_t column) const {return tensor.at(row).at(column);}
+        Point& at(size_t row, size_t column) {return tensor.at(row).at(column);}; // const_cast trick cannot work (const value -> reference conversion)
 };
 
-class NotMultipliableTensorException : public std::exception 
+class TensorOperationException : public std::exception 
 {
     private:
         char * message;
 
     public:
-        NotMultipliableTensorException(char * msg) : message(msg){}
+        TensorOperationException(char * msg) : message(msg){}
         char* what () {return message;}
 };
 
