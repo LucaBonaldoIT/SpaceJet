@@ -30,3 +30,30 @@ std::string Tensor::toString()
     return str;
 
 }
+
+Tensor Tensor::operator*(const Tensor& other)
+{
+    if (this->columns != other.rows)
+    {
+        throw NotMultipliableTensorException("First tensor's number of columns must equals second tensor's number of rows.");
+    }
+    
+    Tensor product(this->rows, other.columns);
+    for (int r = 0; r < this->rows; r++)
+    {
+        for (int c = 0; c < other.columns; c++)
+        {
+            // Row Vector - Column Vector multiplication
+            for (int i = 0; i < other.rows; i++)
+            {
+                Point first = this->tensor.at(r).at(i);
+                Point second = other.tensor.at(i).at(c);
+
+                product.tensor.at(r).at(c) += (first*second);
+            }
+        }
+    }
+
+    return product;
+}
+
