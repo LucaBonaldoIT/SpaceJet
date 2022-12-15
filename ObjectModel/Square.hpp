@@ -8,7 +8,7 @@ class Square : public Node
     public:
         Square()
         {
-            this->spriteInfo = SpriteInfo("minion");
+            _spriteInfo = SpriteInfo("minion");
         }
 };
 

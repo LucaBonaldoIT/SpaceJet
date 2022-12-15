@@ -5,6 +5,7 @@
 #include "DeltaTime.hpp"
 
 typedef float Mass;
+typedef float Inertia;
 
 struct SpriteInfo
 {
@@ -22,14 +23,17 @@ struct SpriteInfo
 class Node
 {
     protected:
-        Vector3d position;
-        Vector3d velocity;
-        Vector3d acceleration;
-        Vector3d force;
+        Vector3d _position;
+        Vector3d _velocity;
+        Vector3d _acceleration;
+        Vector3d _force;
 
-        Mass mass;
+        Mass _mass;
+        Inertia _inertia;
 
-        SpriteInfo spriteInfo;
+        SpriteInfo _spriteInfo;
+
+        
 
     public:
 

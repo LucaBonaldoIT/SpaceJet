@@ -3,27 +3,28 @@
 
 Node::Node()
 {
-    this-> mass = 1;
+    _mass = 1;
+    _inertia = 0.99;
 }
 
 SpriteInfo Node::getSpriteInfo()
 {
-    return this->spriteInfo;
+    return _spriteInfo;
 };
 void Node::updatePhysics(DeltaTime dt)
 {
-    this->acceleration = this->acceleration + (this->force / this->mass);
-    this->velocity = this->velocity + this->acceleration;
-    this->position = this->position + this->velocity;
-    this->force = Vector3d();
+    _acceleration = _acceleration * _inertia + (_force * (1/_inertia) / _mass);
+    _velocity = _velocity + _acceleration * 4;
+    _position = _position + _velocity;
+    _force = Vector3d();
     return;
 };
 void Node::applyForce(Vector3d force)
 {
-    this->force = force;
+    _force = force;
 };
 
 Vector3d Node::getPosition()
 {
-    return this->position;
+    return _position;
 }
