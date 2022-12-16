@@ -153,3 +153,13 @@ Tensor Tensor::getColumnVector3d(Vector3d vector)
 {
     return Tensor::getRowVector3d(vector).transposed();
 }
+
+Tensor Tensor::getIdentity(size_t size)
+{
+    Tensor identity(size, size);
+    for (size_t i = 0; i < size; i++)
+    {
+        identity.at(i, i) = 1;
+    }
+    return identity;
+}

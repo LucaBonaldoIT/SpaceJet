@@ -53,17 +53,33 @@ class Renderer
 
     std::map <std::string, SDL_Texture*> sprites;
 
+    /**
+     * @brief Loads all sprites from spriteList in sprites map,
+     * binding each string (key) with a SDL_Texture* (value).
+     */
     void loadSprites();
 
+    /**
+     * @brief Load single texture from file through SDL's functions.
+     * 
+     * @param renderer 
+     * @param file 
+     * @return SDL_Texture* to be added as value in sprites map.
+     */
     SDL_Texture* loadTextureFromFile(SDL_Renderer *renderer, const char *file);
 
+    /**
+     * @brief Sets renderer's state to initialized and loads sprites in memory.
+     * 
+     * @return Renderer* this instance
+     */
     Renderer* initialize();
 
     Renderer(SDL_Window*);
 
     static inline Renderer* instance;
 
-    Vector2d projectVector(Vector3d);
+    Vector2d projectVector(Vector3d);   //???
 
     public:
 
@@ -71,6 +87,7 @@ class Renderer
 
     static Renderer* getInstance(SDL_Window*);
     static Renderer* getInstance();
+
 
     void clear();
     void draw(std::vector<Node*>);

@@ -33,6 +33,9 @@ class Node
 
         // Holds sprite name
         SpriteInfo _spriteInfo;
+        // Sprite size ratio of this instance sprite to original image
+        float width_ratio;
+        float height_ratio;
 
         
 
@@ -40,7 +43,12 @@ class Node
 
         Node();
 
+        // ------------- Sprites info -------------
         SpriteInfo getSpriteInfo();
+        float getWidthRatio(){return width_ratio;};
+        float getHeightRatio(){return height_ratio;};
+
+        // ------------- Physics actions -------------
         void updatePhysics(DeltaTime);
         void applyForce(Vector3d);
         void applyImpulse(Vector3d);

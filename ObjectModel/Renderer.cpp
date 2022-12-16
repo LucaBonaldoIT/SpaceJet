@@ -24,7 +24,7 @@ void Renderer::loadSprites()
 {
     for(const auto & sprite : spriteList.getSpriteIds())
     {
-        // Insert all sprites in sprites map (id, SDL_Texture*)
+        // Insert sprite in sprites map (id, SDL_Texture*)
         this->sprites.insert({
             sprite,
             loadTextureFromFile(this->renderer,
@@ -102,8 +102,13 @@ void Renderer::draw(std::vector<Node*> nodes)
 
         SDL_QueryTexture(this->sprites.at(node->getSpriteInfo().id), NULL, NULL, &rect.w, &rect.h);
 
-        rect.w /= 3;
-        rect.h /= 3;
+        //rect.w /= 3;
+        //rect.h /= 3;
+
+
+        // Updates rect width and height before copying to the SDL renderer
+        rect.w *= node->getWidthRatio();
+        rect.h *= node->getHeightRatio();
 
         SDL_RenderCopy(this->renderer,
                        this->sprites.at(node->getSpriteInfo().id),

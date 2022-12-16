@@ -9,6 +9,8 @@ class Square : public Node
         Square()
         {
             _spriteInfo = SpriteInfo("minion");
+            width_ratio = 0.333f;
+            height_ratio = 0.333f;
         }
 };
 
