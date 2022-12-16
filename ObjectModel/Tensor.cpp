@@ -59,10 +59,13 @@ Tensor Tensor::operator*(const Tensor& other) const
             // Row Vector - Column Vector multiplication
             for (int i = 0; i < other.rows; i++)
             {
-                Point first = this->tensor.at(r).at(i);
-                Point second = other.tensor.at(i).at(c);
-
-                product.tensor.at(r).at(c) += (first*second);
+                //Point first = this->tensor.at(r).at(i);
+                //Point second = other.tensor.at(i).at(c);
+                //product.tensor.at(r).at(c) += (first*second);
+                
+                Point first = this->at(r, c);
+                Point second = other.at(i, c);
+                product.at(r, c) += (first*second);
             }
         }
     }
@@ -117,6 +120,15 @@ Tensor Tensor::operator+(const Tensor& other)
     return (*const_cast<const Tensor*>(this)) + other;
 }
 
+Tensor Tensor::operator-(const Tensor& other) const
+{
+    return (*this) + (other * -1);
+}
+
+Tensor Tensor::operator-(const Tensor& other)
+{
+    return (*this) + (other * -1);
+}
 
 Tensor Tensor::operator*(const Point& other) const
 {
@@ -143,6 +155,16 @@ Tensor Tensor::operator*(const Point& other)
 {
     // Using const version of operator*. this is dereferenced after const_cast
     return (*const_cast<const Tensor*>(this)) * other;
+}
+
+Tensor Tensor::operator/(const Point& other) const
+{
+    return (*this) * (1/other);
+}
+
+Tensor Tensor::operator/(const Point& other)
+{
+    return (*this) * (1/other);
 }
 
 

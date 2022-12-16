@@ -27,14 +27,21 @@ class Tensor
 
         Tensor transposed();
 
+        // ----------- Tensor - Tensor operations -----------
         Tensor operator*(const Tensor& other)  const;
         Tensor operator*(const Tensor& other);
         Tensor operator*(const Vector3d& other) const;
         Tensor operator*(const Vector3d& other);
         Tensor operator+(const Tensor& other) const;
         Tensor operator+(const Tensor& other);
+        Tensor operator-(const Tensor& other) const;
+        Tensor operator-(const Tensor& other);
+
+        // ----------- Tensor - Scalar operations -----------
         Tensor operator*(const Point& other) const;
         Tensor operator*(const Point& other);
+        Tensor operator/(const Point& other) const;
+        Tensor operator/(const Point& other);
 
         static Tensor getRowVector3d(Vector3d);
         static Tensor getColumnVector3d(Vector3d);

@@ -52,6 +52,7 @@ class Node
         void updatePhysics(DeltaTime);
         void applyForce(Vector3d);
         void applyImpulse(Vector3d);
+        void setVelocity(Vector3d);
         Vector3d getPosition();
 };
 

@@ -77,16 +77,17 @@ void Engine::processEvent(SDL_Event* event)
         switch (event->key.keysym.sym)
         {
         case SDLK_d:
-            this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
+            //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
+            this->nodes.at(0)->applyForce(Vector3d(0.1, 0, 0));
             break;
         case SDLK_w:
-            this->nodes.at(0)->applyForce(Vector3d(0, -0.00001, 0));
+            this->nodes.at(0)->applyForce(Vector3d(0, -0.1, 0));
             break;
         case SDLK_a:
-            this->nodes.at(0)->applyForce(Vector3d(-0.00001, 0, 0));
+            this->nodes.at(0)->applyForce(Vector3d(-0.1, 0, 0));
             break;
         case SDLK_s:
-            this->nodes.at(0)->applyForce(Vector3d(0, 0.00001, 0));
+            this->nodes.at(0)->applyForce(Vector3d(0, 0.1, 0));
             break;
         default:
             break;
