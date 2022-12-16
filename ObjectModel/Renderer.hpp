@@ -33,7 +33,14 @@ class Renderer
         public:
         const std::string DEFAULT_SPRITES_PATH = "./sprites/";
         const std::string DEFAULT_FILE_EXT = ".png";
+
+        /**
+         * Initializes an internal list with sprite names (spriteIds)
+         * from ./sprites/ folder. Only names are kept, extensions are
+         * removed.
+        */
         SpriteList();
+        
         std::vector<std::string> getSpriteIds() {return this->spriteIds;};
         std::string getSpritePath(std::string sprite) {return DEFAULT_SPRITES_PATH + sprite + DEFAULT_FILE_EXT;}
 

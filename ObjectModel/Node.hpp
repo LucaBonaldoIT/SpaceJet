@@ -31,6 +31,7 @@ class Node
         Mass _mass;
         Inertia _inertia;
 
+        // Holds sprite name
         SpriteInfo _spriteInfo;
 
         
