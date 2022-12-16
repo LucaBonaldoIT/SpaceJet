@@ -33,7 +33,11 @@ std::string Tensor::toString()
 
 void Tensor::resize(size_t new_rows, size_t new_columns)
 {
-    tensor.resize(new_rows);
+    /*Resizing the tensor internal structure is not big deal as
+      resizing vector is safe - data is kept (obviusly elements
+      cut from the tensor is lost forever.)
+      tensor.resize(new_rows);
+    */
     for (auto it = tensor.begin(); it != tensor.end(); it++)
     {
         it->resize(new_columns);
@@ -68,9 +72,23 @@ Tensor Tensor::operator*(const Tensor& other) const
 
 Tensor Tensor::operator*(const Tensor& other)
 {
-    // Using const version of operator*
-    return const_cast<const Tensor*>(this)->operator*(other);
+    // Using const version of operator*. this is dereferenced after const_cast
+    return (*const_cast<const Tensor*>(this)) * other;
 }
+
+Tensor Tensor::operator*(const Vector3d& other) const
+{
+    // Get column vector equivalent before multiplication
+    Tensor otherColumn = Tensor::getColumnVector3d(other);
+    return (*this) * otherColumn;
+}
+
+Tensor Tensor::operator*(const Vector3d& other)
+{
+    // Using const version of operator*. this is dereferenced after const_cast
+    return (*const_cast<const Tensor*>(this)) * other;
+}
+
 
 Tensor Tensor::operator+(const Tensor& other) const
 {
@@ -80,6 +98,8 @@ Tensor Tensor::operator+(const Tensor& other) const
     }
     
     Tensor sum(this->rows, this->columns);
+
+    // Sum element by element
     for (size_t r = 0; r < this->rows; r++)
     {
         for (size_t c = 0; c < other.columns; c++)
@@ -93,8 +113,8 @@ Tensor Tensor::operator+(const Tensor& other) const
 
 Tensor Tensor::operator+(const Tensor& other)
 {
-    // Using const version of operator+
-    return const_cast<const Tensor*>(this)->operator+(other);
+    // Using const version of operator+. this is dereferenced after const_cast
+    return (*const_cast<const Tensor*>(this)) + other;
 }
 
 
@@ -121,17 +141,19 @@ Tensor Tensor::operator*(const Point& other) const
 
 Tensor Tensor::operator*(const Point& other)
 {
-    return const_cast<const Tensor*>(this)->operator*(other);
+    // Using const version of operator*. this is dereferenced after const_cast
+    return (*const_cast<const Tensor*>(this)) * other;
 }
 
 
 Tensor Tensor::transposed()
 {
-    // Rows and columns inverted
+    // Rows and columns size inverted
     Tensor _transposed(this->columns, this->rows);
 
     for (int r = 0; r < this->rows; r++)
     {
+        // Puts this' row to _transposed's column
         for (int c = 0; c < this->columns; c++)
         {
             _transposed.at(c, r) = this->at(r, c);

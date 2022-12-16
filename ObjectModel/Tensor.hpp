@@ -29,6 +29,8 @@ class Tensor
 
         Tensor operator*(const Tensor& other)  const;
         Tensor operator*(const Tensor& other);
+        Tensor operator*(const Vector3d& other) const;
+        Tensor operator*(const Vector3d& other);
         Tensor operator+(const Tensor& other) const;
         Tensor operator+(const Tensor& other);
         Tensor operator*(const Point& other) const;
