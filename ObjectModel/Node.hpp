@@ -42,6 +42,7 @@ class Node
         SpriteInfo getSpriteInfo();
         void updatePhysics(DeltaTime);
         void applyForce(Vector3d);
+        void applyImpulse(Vector3d);
         Vector3d getPosition();
 };
 

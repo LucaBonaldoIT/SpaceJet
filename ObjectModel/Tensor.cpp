@@ -139,3 +139,17 @@ Tensor Tensor::transposed()
     }
     return _transposed;
 }
+
+Tensor Tensor::getRowVector3d(Vector3d vector)
+{
+    Tensor rowVector(1, 3);
+    rowVector.at(0, 1) = vector.x;
+    rowVector.at(0, 2) = vector.x;
+    rowVector.at(0, 3) = vector.x;
+    return rowVector;
+}
+
+Tensor Tensor::getColumnVector3d(Vector3d vector)
+{
+    return Tensor::getRowVector3d(vector).transposed();
+}

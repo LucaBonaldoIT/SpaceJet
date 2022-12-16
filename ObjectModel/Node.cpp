@@ -24,6 +24,12 @@ void Node::applyForce(Vector3d force)
     _force = force;
 };
 
+void Node::applyImpulse(Vector3d impulse)
+{
+    // m(v2-v1)=J
+    _velocity = _velocity + impulse / _mass;
+}
+
 Vector3d Node::getPosition()
 {
     return _position;

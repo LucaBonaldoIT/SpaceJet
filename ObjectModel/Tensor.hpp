@@ -2,6 +2,7 @@
 #define TENSOR_H
 
 #include "Vector2d.hpp"
+#include "Vector3d.hpp"
 #include <vector>
 #include <string>
 
@@ -32,6 +33,10 @@ class Tensor
 
         Point at(size_t row, size_t column) const {return tensor.at(row).at(column);}
         Point& at(size_t row, size_t column) {return tensor.at(row).at(column);}; // const_cast trick cannot work (const value -> reference conversion)
+
+        static Tensor getRowVector3d(Vector3d);
+        static Tensor getColumnVector3d(Vector3d);
+
 };
 
 class TensorOperationException : public std::exception 
