@@ -49,7 +49,7 @@ class Engine
 
     static Engine* getInstance();
 
-    void processEvent(SDL_Event*);
+    void processEvent(const Uint8*);
 
     void updatePhysics(DeltaTime dt);
     void renderFrame();

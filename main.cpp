@@ -103,12 +103,13 @@ int main(int argc, char * argv[])
 	{
 
 	    start = std::chrono::steady_clock::now();
-		
+
 		while(frameTime > 0.0)
 		{
 			while(SDL_PollEvent(&event))
 			{
-				engine->processEvent(&event);
+				const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+				engine->processEvent(currentKeyStates);
 			}
 
 			dt = std::min(frameTime, maxDt);

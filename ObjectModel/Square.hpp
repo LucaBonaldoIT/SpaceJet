@@ -5,6 +5,8 @@
 
 class Square : public Node
 {
+
+
     public:
         Square()
         {
@@ -12,6 +14,12 @@ class Square : public Node
             width_ratio = 0.333f;
             height_ratio = 0.333f;
         }
+
+        Speed getMaxSpeed()
+        {
+            return 2;
+        }
+
 };
 
 #endif

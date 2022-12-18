@@ -44,7 +44,7 @@ void Node::applyImpulse(Vector3d impulse)
 
 void Node::setVelocity(Vector3d velocity)
 {
-    _velocity = velocity;
+    _velocity = velocity * 1;
 }
 
 Vector3d Node::getPosition()

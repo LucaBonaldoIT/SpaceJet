@@ -4,6 +4,7 @@
 #include "Vector3d.hpp"
 #include "DeltaTime.hpp"
 
+typedef double Speed;
 typedef float Mass;
 typedef float Inertia;
 
@@ -43,12 +44,17 @@ class Node
 
         Node();
 
+        
+
         // ------------- Sprites info -------------
         SpriteInfo getSpriteInfo();
         float getWidthRatio(){return width_ratio;};
         float getHeightRatio(){return height_ratio;};
 
         // ------------- Physics actions -------------
+
+        virtual Speed getMaxSpeed() = 0;
+
         void updatePhysics(DeltaTime);
         void applyForce(Vector3d);
         void applyImpulse(Vector3d);

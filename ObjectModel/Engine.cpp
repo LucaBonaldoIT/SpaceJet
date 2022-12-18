@@ -68,31 +68,52 @@ Engine::~Engine()
 	SDL_Quit();
 }
 
-void Engine::processEvent(SDL_Event* event)
+void Engine::processEvent(const Uint8* currentKeyStates)
 {
-    Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
+    // Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
 
-    if (event->type = SDL_KEYDOWN)
-    {
-        switch (event->key.keysym.sym)
-        {
-        case SDLK_d:
+    // if (event->type == SDL_KEYDOWN)
+    // {
+
+        Vector3d res = Vector3d();
+
             //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
-            this->nodes.at(0)->applyVelocity(Vector3d(0.1, 0, 0));
-            break;
-        case SDLK_w:
-            this->nodes.at(0)->applyVelocity(Vector3d(0, -0.1, 0));
-            break;
-        case SDLK_a:
-            this->nodes.at(0)->applyVelocity(Vector3d(-0.1, 0, 0));
-            break;
-        case SDLK_s:
-            this->nodes.at(0)->applyVelocity(Vector3d(0, 0.1, 0));
-            break;
-        default:
-            break;
-        }
-    }
+        if (currentKeyStates[ SDL_SCANCODE_RIGHT ])
+            res = res + (Vector3d(1, 0, 0));
+        if(currentKeyStates[ SDL_SCANCODE_DOWN ])
+            res = res + (Vector3d(0, -1, 0));
+        if(currentKeyStates[ SDL_SCANCODE_LEFT ])
+            res = res + (Vector3d(-1, 0, 0));
+        if (currentKeyStates[ SDL_SCANCODE_UP ])
+            res = res + (Vector3d(0, 1, 0));
+
+        this->nodes.at(0)->setVelocity(res);
+
+
+    // }
+
+
+    // if (event->type == SDL_KEYUP)
+    // {
+    //     switch (event->key.keysym.sym)
+    //     {
+    //     case SDLK_d:
+    //         //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
+    //         this->nodes.at(0)->setVelocity(Vector3d(0., 0, 0));
+    //         break;
+    //     case SDLK_w:
+    //         this->nodes.at(0)->setVelocity(Vector3d(0, 0., 0));
+    //         break;
+    //     case SDLK_a:
+    //         this->nodes.at(0)->setVelocity(Vector3d(0., 0, 0));
+    //         break;
+    //     case SDLK_s:
+    //         this->nodes.at(0)->setVelocity(Vector3d(0, 0., 0));
+    //         break;
+    //     default:
+    //         break;
+    //     }
+    // }
 
 }
 
