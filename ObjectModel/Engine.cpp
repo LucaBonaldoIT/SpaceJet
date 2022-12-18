@@ -78,16 +78,16 @@ void Engine::processEvent(SDL_Event* event)
         {
         case SDLK_d:
             //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
-            this->nodes.at(0)->applyForce(Vector3d(0.1, 0, 0));
+            this->nodes.at(0)->applyVelocity(Vector3d(0.1, 0, 0));
             break;
         case SDLK_w:
-            this->nodes.at(0)->applyForce(Vector3d(0, -0.1, 0));
+            this->nodes.at(0)->applyVelocity(Vector3d(0, -0.1, 0));
             break;
         case SDLK_a:
-            this->nodes.at(0)->applyForce(Vector3d(-0.1, 0, 0));
+            this->nodes.at(0)->applyVelocity(Vector3d(-0.1, 0, 0));
             break;
         case SDLK_s:
-            this->nodes.at(0)->applyForce(Vector3d(0, 0.1, 0));
+            this->nodes.at(0)->applyVelocity(Vector3d(0, 0.1, 0));
             break;
         default:
             break;
@@ -96,13 +96,13 @@ void Engine::processEvent(SDL_Event* event)
 
 }
 
-void Engine::updatePhysics()
+void Engine::updatePhysics(DeltaTime dt)
 {
     for (auto it = Engine::nodes.begin(); it != Engine::nodes.end(); it++)
     {
         // Update each node physics
         Node* current = *it;
-        current->updatePhysics(0.0f);
+        current->updatePhysics(dt);
     }
 }
 

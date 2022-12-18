@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+
 #include "ObjectModel/Logger.hpp"
 #include "ObjectModel/Square.hpp"
 #include "ObjectModel/Engine.hpp"
@@ -91,18 +93,34 @@ int main(int argc, char * argv[])
 
 	Logger::log("Entering game loop...");
 
+	auto start = std::chrono::steady_clock::now();
+	auto end = std::chrono::steady_clock::now();
+	double maxDt = 1/60.0;
+	double frameTime = 1/60.0;
+	double dt;
+
 	while(engine->isRunning())
 	{
 
-		while(SDL_PollEvent(&event))
+	    start = std::chrono::steady_clock::now();
+		
+		while(frameTime > 0.0)
 		{
-			engine->processEvent(&event);
-		}
+			while(SDL_PollEvent(&event))
+			{
+				engine->processEvent(&event);
+			}
 
-		engine->updatePhysics();
+			dt = std::min(frameTime, maxDt);
+
+			engine->updatePhysics(dt);
+			frameTime -= dt;
+		}
 
 		engine->renderFrame();
 
+		end = std::chrono::steady_clock::now();
+		frameTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000000000.0;
 	}
 
 	Logger::log("Exiting game loop...");

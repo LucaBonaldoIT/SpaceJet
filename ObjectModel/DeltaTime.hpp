@@ -1,4 +1,4 @@
 #ifndef DELTA_TIME_H
 #define DELTA_TIME_H
-typedef float DeltaTime;
+typedef double DeltaTime;
 #endif

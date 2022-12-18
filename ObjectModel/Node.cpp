@@ -31,6 +31,11 @@ void Node::applyForce(Vector3d force)
     _force = force;
 };
 
+void Node::applyVelocity(Vector3d velocity)
+{
+    _velocity = _velocity + velocity;
+};
+
 void Node::applyImpulse(Vector3d impulse)
 {
     // m(v2-v1)=J - Impulse theorem

@@ -51,7 +51,7 @@ class Engine
 
     void processEvent(SDL_Event*);
 
-    void updatePhysics();
+    void updatePhysics(DeltaTime dt);
     void renderFrame();
 
     bool isRunning();
