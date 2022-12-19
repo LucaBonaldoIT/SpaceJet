@@ -7,6 +7,7 @@
 typedef double Speed;
 typedef float Mass;
 typedef float Inertia;
+typedef float Ratio;
 
 struct SpriteInfo
 {
@@ -35,8 +36,8 @@ class Node
         // Holds sprite name
         SpriteInfo _spriteInfo;
         // Sprite size ratio of this instance sprite to original image
-        float width_ratio;
-        float height_ratio;
+        float _widthRatio;
+        float _heightRatio;
 
         
 
@@ -48,19 +49,23 @@ class Node
 
         // ------------- Sprites info -------------
         SpriteInfo getSpriteInfo();
-        float getWidthRatio(){return width_ratio;};
-        float getHeightRatio(){return height_ratio;};
+        Ratio getWidthRatio(){return _widthRatio;};
+        Ratio getHeightRatio(){return _heightRatio;};
+
+        void setRatio(Ratio);
 
         // ------------- Physics actions -------------
 
         virtual Speed getMaxSpeed() = 0;
+
+        Vector3d getPosition();
+        void setPosition(Vector3d);
 
         void updatePhysics(DeltaTime);
         void applyForce(Vector3d);
         void applyImpulse(Vector3d);
         void applyVelocity(Vector3d);
         void setVelocity(Vector3d);
-        Vector3d getPosition();
 };
 
 #endif

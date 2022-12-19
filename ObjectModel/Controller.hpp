@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include "Vector3d.hpp"
+#include "Player.hpp"
 #include "Logger.hpp"
 
 typedef const Uint8* KeyboardState;

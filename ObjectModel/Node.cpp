@@ -23,7 +23,6 @@ void Node::updatePhysics(DeltaTime dt)
     _position = _position + _velocity;
     _force = Vector3d();
 
-    
     return;
 };
 void Node::applyForce(Vector3d force)
@@ -47,7 +46,18 @@ void Node::setVelocity(Vector3d velocity)
     _velocity = velocity * 1;
 }
 
+void Node::setRatio(Ratio ratio)
+{
+    _widthRatio = ratio;
+    _heightRatio = ratio;
+}
+
 Vector3d Node::getPosition()
 {
     return _position;
+}
+
+void Node::setPosition(Vector3d position)
+{
+    _position = position;
 }

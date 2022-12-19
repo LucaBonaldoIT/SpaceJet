@@ -5,8 +5,9 @@
 #include "Renderer.hpp"
 #include "Node.hpp"
 #include "Logger.hpp"
-#include "Square.hpp"
+#include "Player.hpp"
 #include "Controller.hpp"
+#include "Starfield.hpp"
 #include <vector>
 
 enum EngineState {

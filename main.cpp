@@ -2,7 +2,7 @@
 #include <chrono>
 
 #include "ObjectModel/Logger.hpp"
-#include "ObjectModel/Square.hpp"
+#include "ObjectModel/Player.hpp"
 #include "ObjectModel/Engine.hpp"
 #include "ObjectModel/Tensor.hpp"
 #include "ObjectModel/Vector3d.hpp"

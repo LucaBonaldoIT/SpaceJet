@@ -7,6 +7,7 @@ typedef float Point;
 
 struct Vector3d
 {
+
     Point x;
     Point y;
     Point z;
@@ -50,5 +51,10 @@ struct Vector3d
     }
 
 };
+
+const Vector3d UP_VECTOR_3D     = Vector3d( 0,-1, 0);
+const Vector3d DOWN_VECTOR_3D   = Vector3d( 0, 1, 0);
+const Vector3d RIGHT_VECTOR_3D  = Vector3d( 1, 0, 0);
+const Vector3d LEFT_VECTOR_3D   = Vector3d(-1, 0, 0);
 
 #endif

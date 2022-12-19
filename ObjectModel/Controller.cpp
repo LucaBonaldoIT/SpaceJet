@@ -32,8 +32,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(0, 1, 0));
-                        Logger::log((key + "\n").c_str());
+                res = res + DOWN_VECTOR_3D;
 
             }
             continue;
@@ -43,8 +42,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(0, -1, 0));
-                        Logger::log((key + "\n").c_str());
+                res = res + UP_VECTOR_3D;
 
             }
             continue;
@@ -54,7 +52,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(-1, 0, 0));        Logger::log((key + "\n").c_str());
+                res = res + LEFT_VECTOR_3D;
 
             }
             continue;
@@ -64,19 +62,14 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(1, 0, 0));        Logger::log((key + "\n").c_str());
+                res = res + RIGHT_VECTOR_3D;
 
             }
             continue;
         }
     }
 
-    try{
-        Engine::getInstance()->getNodes().at(0)->setVelocity(res);
-                Logger::log("CIao");
-    }       
-    catch (const std::exception& e){
-        ;}
+    Player::getInstance()->setVelocity(res);
 }
 
 

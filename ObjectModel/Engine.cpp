@@ -49,7 +49,7 @@ Engine::Engine()
 
 
     Engine::_nodes = std::vector<Node*>({
-        new Square()
+        Player::getInstance()
     });
 
     if (window == nullptr)
@@ -58,6 +58,7 @@ Engine::Engine()
         return;
     }
 
+    Starfield::generateStars();
 
     // Setup renderer and set running state
     this->renderer = Renderer::getInstance(this->window);
@@ -125,6 +126,9 @@ std::vector<Node*> Engine::getNodes()
 
 void Engine::updatePhysics(DeltaTime dt)
 {
+    
+    Starfield::updateStars();
+
     for (auto it = Engine::_nodes.begin(); it != Engine::_nodes.end(); it++)
     {
         // Update each node physics
@@ -137,6 +141,7 @@ void Engine::renderFrame()
 {
 
     this->renderer->getInstance()->clear();
+    this->renderer->getInstance()->draw(Starfield::getStars());
     this->renderer->getInstance()->draw(this->_nodes);
     this->renderer->getInstance()->update();
 
