@@ -77,7 +77,7 @@ class Renderer
 
     Renderer(SDL_Window*);
 
-    static inline Renderer* instance;
+    static Renderer* _instance;
 
     Vector2d projectVector(Vector3d);   //???
 
@@ -96,5 +96,6 @@ class Renderer
     RendererState getState();
 
 };
+
 
 #endif

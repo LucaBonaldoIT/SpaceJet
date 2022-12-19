@@ -38,7 +38,7 @@ class Engine
 
     static inline std::vector<Node*> _nodes;
 
-    static inline EngineState state;
+    static inline EngineState _state;
 
     Engine();
 
@@ -61,6 +61,7 @@ class Engine
     bool isRunning();
 
 };
+
 
 class WindowNotIstantiatedException : public std::exception 
 {

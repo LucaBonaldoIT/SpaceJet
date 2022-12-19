@@ -1,9 +1,13 @@
 #include "Engine.hpp"
-
 Engine* Engine::_instance= nullptr;
 
 Engine* Engine::initialize()
 {
+
+    if (_state != EngineState::EngineUninitialized)
+    {
+        return this;
+    }
 
     Logger::log("Initializing SDL2...");
 
@@ -17,7 +21,7 @@ Engine* Engine::initialize()
 
     Logger::log("Initializing SDL2...");
 
-    Engine::state = EngineState::EngineInitialized;
+    Engine::_state = EngineState::EngineInitialized;
 
     return this;
 
@@ -27,12 +31,12 @@ Engine* Engine::getInstance()
 {
     if (_instance != nullptr)
     {
-        return Engine::_instance;
+        return _instance;
     }
 
-    Engine::_instance = (new Engine())->initialize();
+    _instance = (new Engine())->initialize();
 
-    return Engine::_instance;
+    return _instance;
 }
 
 
@@ -58,7 +62,7 @@ Engine::Engine()
     // Setup renderer and set running state
     this->renderer = Renderer::getInstance(this->window);
     Logger::log("Renderer istantiated.");
-    Engine::state = EngineState::EngineRunning;
+    Engine::_state = EngineState::EngineRunning;
 
 }
 
@@ -70,7 +74,7 @@ Engine::~Engine()
 
 void Engine::processEvent(SDL_Event* event)
 {
-    Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
+    Engine::_state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
 
     // if (event->type == SDL_KEYDOWN)
     // {
@@ -140,6 +144,6 @@ void Engine::renderFrame()
 
 bool Engine::isRunning()
 {
-    return Engine::state == EngineState::EngineRunning;
+    return Engine::_state == EngineState::EngineRunning;
 }
 

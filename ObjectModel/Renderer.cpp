@@ -1,5 +1,7 @@
 #include "Renderer.hpp"
 
+Renderer* Renderer::_instance= nullptr;
+
 Renderer::SpriteList::SpriteList()
 {
     for (const auto & entry : std::filesystem::directory_iterator(DEFAULT_SPRITES_PATH))
@@ -64,9 +66,9 @@ Renderer* Renderer::getInstance(SDL_Window* window)
         return nullptr;
     }
 
-    Renderer::instance = (new Renderer(window))->initialize();
+    Renderer::_instance = (new Renderer(window))->initialize();
 
-    return Renderer::instance;
+    return Renderer::_instance;
 
 }
 
@@ -77,7 +79,7 @@ Renderer* Renderer::getInstance()
         Logger::log("Error! Uninitialized!");
     }
 
-    return Renderer::instance;
+    return Renderer::_instance;
 
 }
 

@@ -74,7 +74,7 @@ void Controller::processInput(KeyboardState state)
     try{
         Engine::getInstance()->getNodes().at(0)->setVelocity(res);
                 Logger::log("CIao");
-}
+    }       
     catch (const std::exception& e){
         ;}
 }
