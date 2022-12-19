@@ -1,29 +1,27 @@
-#ifndef GAME_CONTROLLER_H
-#define GAME_CONTROLLER_H
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include <SDL2/SDL.h>
 #include <string>
 #include <map>
-
 #include "Vector3d.hpp"
-#include "Engine.hpp"
 
 typedef const Uint8* KeyboardState;
 
-class GameController
+class Controller
 {
 
     private:
 
     std::map<std::string,int> _actionsByKeyCode;
     
-    static inline GameController* _instance = nullptr;
+    static inline Controller* _instance = nullptr;
 
-    GameController();
+    Controller();
 
     public:
 
-    static GameController* getInstance();
+    static Controller* getInstance();
 
     void bind(std::string, int);
 

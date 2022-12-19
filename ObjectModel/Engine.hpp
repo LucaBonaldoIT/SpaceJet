@@ -1,12 +1,12 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "GameController.hpp"
 #include "Game.hpp"
 #include "Renderer.hpp"
 #include "Node.hpp"
 #include "Logger.hpp"
 #include "Square.hpp"
+#include "Controller.hpp"
 #include <vector>
 
 enum EngineState {
@@ -42,16 +42,16 @@ class Engine
 
     Engine();
 
-    static inline Engine* _instance = nullptr;
+    static Engine* _instance;
 
-    GameController* _controller;
+    Controller* _controller;
 
     public:
 
     ~Engine();
 
     static Engine* getInstance();
-    static std::vector<Node*> getNodes();
+    std::vector<Node*> getNodes();
 
     void processEvent(SDL_Event*);
 

@@ -1,6 +1,7 @@
-#include "GameController.hpp"
+#include "Controller.hpp"
+#include "Engine.hpp"
 
-GameController::GameController()
+Controller::Controller()
 {
 
     _actionsByKeyCode = std::map<std::string, int>
@@ -14,23 +15,26 @@ GameController::GameController()
 
 }
 
-void GameController::bind(std::string action, int keyCode)
+void Controller::bind(std::string action, int keyCode)
 {
     _actionsByKeyCode[action] = keyCode;
 }
 
-void GameController::processInput(KeyboardState state)
+void Controller::processInput(KeyboardState state)
 {
 
     Vector3d res = Vector3d();
 
     for ( const auto &[key, value] : _actionsByKeyCode ) {
-        
+   
+    
         if (key == "DOWN")
         {
             if (state[value])
             {
                 res = res + (Vector3d(0, 1, 0));
+                        Logger::log((key + "\n").c_str());
+
             }
             continue;
         }
@@ -40,6 +44,8 @@ void GameController::processInput(KeyboardState state)
             if (state[value])
             {
                 res = res + (Vector3d(0, -1, 0));
+                        Logger::log((key + "\n").c_str());
+
             }
             continue;
         }
@@ -48,7 +54,8 @@ void GameController::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(-1, 0, 0));
+                res = res + (Vector3d(-1, 0, 0));        Logger::log((key + "\n").c_str());
+
             }
             continue;
         }
@@ -57,23 +64,27 @@ void GameController::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + (Vector3d(1, 0, 0));
+                res = res + (Vector3d(1, 0, 0));        Logger::log((key + "\n").c_str());
+
             }
             continue;
         }
-
     }
 
-    Engine::getNodes().at(0)->setVelocity(res);
-
+    try{
+        Engine::getInstance()->getNodes().at(0)->setVelocity(res);
+                Logger::log("CIao");
+}
+    catch (const std::exception& e){
+        ;}
 }
 
 
-GameController* GameController::getInstance()
+Controller* Controller::getInstance()
 {
     if (_instance == nullptr)
     {
-        _instance = new GameController();
+        _instance = new Controller();
     }
 
     return _instance;

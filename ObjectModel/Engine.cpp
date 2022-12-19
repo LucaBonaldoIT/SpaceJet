@@ -1,6 +1,6 @@
 #include "Engine.hpp"
 
-#include <iostream>
+Engine* Engine::_instance= nullptr;
 
 Engine* Engine::initialize()
 {
@@ -25,7 +25,7 @@ Engine* Engine::initialize()
 
 Engine* Engine::getInstance()
 {
-    if (Engine::state == EngineState::EngineInitialized)
+    if (_instance != nullptr)
     {
         return Engine::_instance;
     }
