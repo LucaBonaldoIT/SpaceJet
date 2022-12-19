@@ -1,6 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
+#include "GameController.hpp"
 #include "Game.hpp"
 #include "Renderer.hpp"
 #include "Node.hpp"
@@ -35,21 +36,24 @@ class Engine
     Game game;
     Renderer* renderer;
 
-    static inline std::vector<Node*> nodes;
+    static inline std::vector<Node*> _nodes;
 
     static inline EngineState state;
 
     Engine();
 
-    static inline Engine* instance;
+    static inline Engine* _instance = nullptr;
+
+    GameController* _controller;
 
     public:
 
     ~Engine();
 
     static Engine* getInstance();
+    static std::vector<Node*> getNodes();
 
-    void processEvent(const Uint8*);
+    void processEvent(SDL_Event*);
 
     void updatePhysics(DeltaTime dt);
     void renderFrame();

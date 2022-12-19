@@ -27,12 +27,12 @@ Engine* Engine::getInstance()
 {
     if (Engine::state == EngineState::EngineInitialized)
     {
-        return Engine::instance;
+        return Engine::_instance;
     }
 
-    Engine::instance = (new Engine())->initialize();
+    Engine::_instance = (new Engine())->initialize();
 
-    return Engine::instance;
+    return Engine::_instance;
 }
 
 
@@ -44,7 +44,7 @@ Engine::Engine()
                                     WINDOW_WIDTH, WINDOW_HEIGHT, 0);
 
 
-    Engine::nodes = std::vector<Node*>({
+    Engine::_nodes = std::vector<Node*>({
         new Square()
     });
 
@@ -68,26 +68,16 @@ Engine::~Engine()
 	SDL_Quit();
 }
 
-void Engine::processEvent(const Uint8* currentKeyStates)
+void Engine::processEvent(SDL_Event* event)
 {
-    // Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
+    Engine::state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
 
     // if (event->type == SDL_KEYDOWN)
     // {
 
-        Vector3d res = Vector3d();
+        
+        _controller->getInstance()->processInput(SDL_GetKeyboardState(nullptr));
 
-            //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
-        if (currentKeyStates[ SDL_SCANCODE_RIGHT ])
-            res = res + (Vector3d(1, 0, 0));
-        if(currentKeyStates[ SDL_SCANCODE_DOWN ])
-            res = res + (Vector3d(0, -1, 0));
-        if(currentKeyStates[ SDL_SCANCODE_LEFT ])
-            res = res + (Vector3d(-1, 0, 0));
-        if (currentKeyStates[ SDL_SCANCODE_UP ])
-            res = res + (Vector3d(0, 1, 0));
-
-        this->nodes.at(0)->setVelocity(res);
 
 
     // }
@@ -117,9 +107,21 @@ void Engine::processEvent(const Uint8* currentKeyStates)
 
 }
 
+std::vector<Node*> Engine::getNodes()
+{
+    if(_instance == nullptr)
+    {
+        return std::vector<Node*>();
+    }
+
+    return _nodes;
+
+}
+
+
 void Engine::updatePhysics(DeltaTime dt)
 {
-    for (auto it = Engine::nodes.begin(); it != Engine::nodes.end(); it++)
+    for (auto it = Engine::_nodes.begin(); it != Engine::_nodes.end(); it++)
     {
         // Update each node physics
         Node* current = *it;
@@ -131,7 +133,7 @@ void Engine::renderFrame()
 {
 
     this->renderer->getInstance()->clear();
-    this->renderer->getInstance()->draw(this->nodes);
+    this->renderer->getInstance()->draw(this->_nodes);
     this->renderer->getInstance()->update();
 
 }

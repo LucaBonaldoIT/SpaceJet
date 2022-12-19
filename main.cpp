@@ -108,8 +108,7 @@ int main(int argc, char * argv[])
 		{
 			while(SDL_PollEvent(&event))
 			{
-				const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
-				engine->processEvent(currentKeyStates);
+				engine->processEvent(&event);
 			}
 
 			dt = std::min(frameTime, maxDt);
