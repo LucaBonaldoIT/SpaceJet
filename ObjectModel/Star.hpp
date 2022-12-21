@@ -15,8 +15,10 @@ class Star : public Node
         _spriteInfo = SpriteInfo("star");
         _widthRatio = 1.0f;
         _heightRatio = 1.0f;
-        _position.x = rand() % 1280;
-        _position.y = rand() % 720;
+        // _position.x = rand() % 1280;
+        // _position.y = rand() % 720;
+        _position.x = rand() % 1500;
+        _position.y = rand() % 1500;    // Rotation testing
         _position.z = 1280;
 
     }

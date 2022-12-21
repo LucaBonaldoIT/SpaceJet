@@ -46,6 +46,8 @@ class Tensor
         static Tensor getRowVector3d(Vector3d);
         static Tensor getColumnVector3d(Vector3d);
         static Tensor getIdentity(size_t);
+        static Tensor getRotationMatrix3d(const float);
+        
 
         std::string toString();
 

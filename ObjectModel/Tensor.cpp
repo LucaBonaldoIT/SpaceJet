@@ -1,6 +1,7 @@
 #include "Tensor.hpp"
 #include <string>
 #include <iostream>
+#include <math.h>
 
 Tensor::Tensor(size_t _rows, size_t _columns)
 {
@@ -63,7 +64,7 @@ Tensor Tensor::operator*(const Tensor& other) const
                 //Point second = other.tensor.at(i).at(c);
                 //product.tensor.at(r).at(c) += (first*second);
                 
-                Point first = this->at(r, c);
+                Point first = this->at(r, i);
                 Point second = other.at(i, c);
                 product.at(r, c) += (first*second);
             }
@@ -187,9 +188,9 @@ Tensor Tensor::transposed()
 Tensor Tensor::getRowVector3d(Vector3d vector)
 {
     Tensor rowVector(1, 3);
-    rowVector.at(0, 1) = vector.x;
-    rowVector.at(0, 2) = vector.x;
-    rowVector.at(0, 3) = vector.x;
+    rowVector.at(0, 0) = vector.x;
+    rowVector.at(0, 1) = vector.y;
+    rowVector.at(0, 2) = vector.z;
     return rowVector;
 }
 
@@ -206,4 +207,16 @@ Tensor Tensor::getIdentity(size_t size)
         identity.at(i, i) = 1;
     }
     return identity;
+}
+
+Tensor Tensor::getRotationMatrix3d(const float degree)
+{
+    Tensor rotationMatrix(3, 3);
+    rotationMatrix.at(0, 0) = cos(degree);
+    rotationMatrix.at(0, 1) = -sin(degree);
+    rotationMatrix.at(1, 0) = sin(degree);
+    rotationMatrix.at(1, 1) = cos(degree);
+    rotationMatrix.at(2, 2) = 1;
+
+    return rotationMatrix;
 }
