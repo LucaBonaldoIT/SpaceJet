@@ -69,6 +69,9 @@ void Controller::processInput(KeyboardState state)
         }
     }
 
+    res = res / (res.module() > 0 ? res.module() : 1);
+    res = res * Player::getInstance()->getDefaultSpeed();
+
     Player::getInstance()->setVelocity(res);
 }
 

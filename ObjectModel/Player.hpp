@@ -18,9 +18,14 @@ class Player : public Node
 
     static Player* getInstance();
 
+    Speed getDefaultSpeed()
+    {
+        return 1000;
+    }
+
     Speed getMaxSpeed()
     {
-        return 2;
+        return 1000;
     }
 };
 

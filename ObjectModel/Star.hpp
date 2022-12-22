@@ -26,7 +26,10 @@ class Star : public Node
         {
             return 0;
         }
-
+Speed getDefaultSpeed()
+        {
+            return 0;
+        }
 };
 
 #endif

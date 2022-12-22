@@ -57,6 +57,7 @@ class Node
         // ------------- Physics actions -------------
 
         virtual Speed getMaxSpeed() = 0;
+        virtual Speed getDefaultSpeed() = 0;
 
         Vector3d getPosition();
         void setPosition(Vector3d);
