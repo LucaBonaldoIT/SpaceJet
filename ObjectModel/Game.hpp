@@ -1,13 +1,13 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <SDL2/SDL.h>
-#include "Renderer.hpp"
+#include <string>
+
 
 namespace Game
 {
 
-    const char* WindowTitle = "Game";
+    const std::string WindowTitle = "Game";
 
     const int WindowWidth = 1280;
     const int WindowHeight = 720; 

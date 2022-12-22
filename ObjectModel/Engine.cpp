@@ -1,4 +1,6 @@
 #include "Engine.hpp"
+//#include "Game.hpp"
+
 Engine* Engine::_instance= nullptr;
 
 Engine* Engine::initialize()
@@ -43,7 +45,7 @@ Engine* Engine::getInstance()
 Engine::Engine()
 {
 
-    this->window = SDL_CreateWindow(Game::WindowTitle,
+    this->window = SDL_CreateWindow(Game::WindowTitle.c_str(),
                                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                                     Game::WindowWidth, Game::WindowHeight, 0);
 
