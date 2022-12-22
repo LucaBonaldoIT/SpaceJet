@@ -8,9 +8,15 @@
 struct SpriteInfo
 {
     const char* id;
+    size_t _width;
+    size_t _height;
 
     SpriteInfo(const char* id) : id{id}
     {}
+
+    SpriteInfo(const char* id, size_t width, size_t height) : id{id}, _height{height}, _width{width}
+    {}
+
 
     SpriteInfo() : id{"default"}
     {
@@ -34,8 +40,8 @@ class Node
         // Sprite size ratio of this instance sprite to original image
         float _widthRatio;
         float _heightRatio;
-
-        
+        size_t _width;
+        size_t _height;        
 
     public:
 
@@ -45,8 +51,10 @@ class Node
 
         // ------------- Sprites info -------------
         SpriteInfo getSpriteInfo();
-        Ratio getWidthRatio(){return _widthRatio;};
-        Ratio getHeightRatio(){return _heightRatio;};
+        Ratio getWidthRatio(){return _widthRatio;}
+        Ratio getHeightRatio(){return _heightRatio;}
+        size_t getWidth(){return _width;}
+        size_t getHeight(){return _height;}
 
         void setRatio(Ratio);
 

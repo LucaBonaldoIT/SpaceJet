@@ -57,9 +57,9 @@ class Starfield
             Vector3d starInitialPosition = _stars[i]->getPosition();
 
             // Traslate star
-            Vector3d starMovement = _stars[i]->getPosition() - _rotationPivot;
-            starMovement = starMovement / starMovement.module();
-            auto pos = _stars[i]->getPosition() + ((starMovement * _expansionSpeed) / starInitialPosition.z);
+            Vector3d starMovement = starInitialPosition - _rotationPivot;   // Distance vector from the rotation point
+            starMovement = starMovement / starMovement.module();            
+            auto pos = starInitialPosition + ((starMovement * _expansionSpeed) / starInitialPosition.z);
 
             // Star rotation
             pos = rotateAround(pos, _rotationPivot);
