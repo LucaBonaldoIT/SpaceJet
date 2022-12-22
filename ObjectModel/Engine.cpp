@@ -43,9 +43,9 @@ Engine* Engine::getInstance()
 Engine::Engine()
 {
 
-    this->window = SDL_CreateWindow(WINDOW_TITLE,
+    this->window = SDL_CreateWindow(Game::WindowTitle,
                                     SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                                    WINDOW_WIDTH, WINDOW_HEIGHT, 0);
+                                    Game::WindowWidth, Game::WindowHeight, 0);
 
 
     Engine::_nodes = std::vector<Node*>({
@@ -77,38 +77,7 @@ void Engine::processEvent(SDL_Event* event)
 {
     Engine::_state = event->type == SDL_QUIT ? EngineState::EngineClosing : EngineState::EngineRunning;
 
-    // if (event->type == SDL_KEYDOWN)
-    // {
-
-        
-        _controller->getInstance()->processInput(SDL_GetKeyboardState(nullptr));
-
-
-
-    // }
-
-
-    // if (event->type == SDL_KEYUP)
-    // {
-    //     switch (event->key.keysym.sym)
-    //     {
-    //     case SDLK_d:
-    //         //this->nodes.at(0)->applyForce(Vector3d(0.00001, 0, 0));
-    //         this->nodes.at(0)->setVelocity(Vector3d(0., 0, 0));
-    //         break;
-    //     case SDLK_w:
-    //         this->nodes.at(0)->setVelocity(Vector3d(0, 0., 0));
-    //         break;
-    //     case SDLK_a:
-    //         this->nodes.at(0)->setVelocity(Vector3d(0., 0, 0));
-    //         break;
-    //     case SDLK_s:
-    //         this->nodes.at(0)->setVelocity(Vector3d(0, 0., 0));
-    //         break;
-    //     default:
-    //         break;
-    //     }
-    // }
+    _controller->getInstance()->processInput(SDL_GetKeyboardState(nullptr));
 
 }
 

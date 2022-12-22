@@ -4,12 +4,16 @@
 #include <SDL2/SDL.h>
 #include "Renderer.hpp"
 
-class Game {
+namespace Game
+{
 
-    private:
-    
-    public:
+    const char* WindowTitle = "Game";
 
-};
+    const int WindowWidth = 1280;
+    const int WindowHeight = 720; 
+
+
+
+}
 
 #endif

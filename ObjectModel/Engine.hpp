@@ -25,16 +25,10 @@ class Engine
 
     private:
 
-    const char* WINDOW_TITLE = "Game";
-
-    const int WINDOW_WIDTH = 1280;
-    const int WINDOW_HEIGHT = 720;
-
     Engine* initialize();
 
     SDL_Window* window;
 
-    Game game;
     Renderer* renderer;
 
     static inline std::vector<Node*> _nodes;
