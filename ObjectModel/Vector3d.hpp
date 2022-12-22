@@ -3,8 +3,7 @@
 
 #include <cmath>
 #include <sstream>
-
-typedef float Point;
+#include "Types.hpp"
 
 struct Vector3d
 {

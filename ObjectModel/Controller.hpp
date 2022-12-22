@@ -7,8 +7,7 @@
 #include "Vector3d.hpp"
 #include "Player.hpp"
 #include "Logger.hpp"
-
-typedef const Uint8* KeyboardState;
+#include "Types.hpp"
 
 class Controller
 {

@@ -1,13 +1,14 @@
 #ifndef TENSOR_H   
 #define TENSOR_H
 
-#include "Vector2d.hpp"
-#include "Vector3d.hpp"
 #include <vector>
 #include <string>
 
+#include "Vector2d.hpp"
+#include "Vector3d.hpp"
+#include "Types.hpp"
+
 typedef Vector2d TensorSize;
-typedef float Point;
 
 
 class Tensor

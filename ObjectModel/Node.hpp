@@ -3,11 +3,7 @@
 
 #include "Vector3d.hpp"
 #include "DeltaTime.hpp"
-
-typedef double Speed;
-typedef float Mass;
-typedef float Inertia;
-typedef float Ratio;
+#include "Types.hpp"
 
 struct SpriteInfo
 {

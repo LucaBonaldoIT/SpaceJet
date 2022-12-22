@@ -1,15 +1,9 @@
 #include <iostream>
 #include <chrono>
 
-#include "ObjectModel/Logger.hpp"
-#include "ObjectModel/Player.hpp"
 #include "ObjectModel/Engine.hpp"
-#include "ObjectModel/Tensor.hpp"
-#include "ObjectModel/Vector3d.hpp"
-#include "ObjectModel/Vector2d.hpp"
+#include "ObjectModel/Common.hpp"
 
-#include <SDL2/SDL.h>
-#include <thread>
 
 int main(int argc, char * argv[])
 {

@@ -2,8 +2,7 @@
 #define VECTOR_2D_H
 
 #include <cmath>
-
-typedef float Point;
+#include "Types.hpp"
 
 struct Vector2d
 {

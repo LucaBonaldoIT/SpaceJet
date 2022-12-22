@@ -1,18 +1,13 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include "Logger.hpp"
-#include "Node.hpp"
-#include "Vector3d.hpp"
-#include "Vector2d.hpp"
-#include "Tensor.hpp"
-
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 #include <map>
 #include <string>
 #include <vector>
 #include <filesystem>
+
+#include "Common.hpp"
+#include "Node.hpp"
 
 enum RendererState
 {

@@ -1,8 +1,7 @@
 #ifndef STAR_H
 #define STAR_H
 
-#include "Game.hpp"
-#include "Random.hpp"
+#include "Common.hpp"
 #include "Node.hpp"
 
 class Star : public Node

@@ -1,14 +1,14 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include "Game.hpp"
-#include "Renderer.hpp"
-#include "Node.hpp"
-#include "Logger.hpp"
-#include "Player.hpp"
-#include "Controller.hpp"
-#include "Starfield.hpp"
 #include <vector>
+
+#include "Common.hpp"
+#include "Renderer.hpp"
+#include "Controller.hpp"
+#include "Node.hpp"
+#include "Player.hpp"
+#include "Starfield.hpp"
 
 enum EngineState {
 

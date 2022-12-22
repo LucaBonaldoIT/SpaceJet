@@ -2,15 +2,12 @@
 #define STARTFIEL_D
 
 #include <vector>
-#include "Node.hpp"
-#include "Star.hpp"
-#include "Tensor.hpp"
-#include "Player.hpp"
-#include "Logger.hpp"
-#include <math.h>
 #include <algorithm>
 
-//const Tensor rotationMatrix = Tensor::getRotationMatrix3d(0.0001f);
+#include "Common.hpp"
+#include "Node.hpp"
+#include "Player.hpp"
+#include "Star.hpp"
 
 class Starfield
 {

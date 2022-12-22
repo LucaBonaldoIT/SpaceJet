@@ -1,7 +1,8 @@
-#include "Node.hpp"
-
 #ifndef PLAYER_H
 #define PLAYER_H
+
+#include "Common.hpp"
+#include "Node.hpp"
 
 class Player : public Node
 {
