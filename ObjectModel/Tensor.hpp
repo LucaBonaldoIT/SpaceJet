@@ -47,7 +47,9 @@ class Tensor
         static Tensor getColumnVector3d(Vector3d);
         static Tensor getIdentity(size_t);
         static Tensor getRotationMatrix3d(const float);
-        
+
+        // ----------- Cast operators -----------
+        operator Vector3d() const;
 
         std::string toString();
 

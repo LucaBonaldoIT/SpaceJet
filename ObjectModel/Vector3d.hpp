@@ -2,6 +2,7 @@
 #define VECTOR_3D_H
 
 #include <cmath>
+#include <sstream>
 
 typedef float Point;
 
@@ -50,6 +51,13 @@ struct Vector3d
         return Vector3d(x / other, y / other, z / other);
     }
 
+
+    operator std::string() const
+    {
+        std::stringstream ss;
+        ss  << "(" << x << ", " << y << ", " << z << ")";
+        return ss.str();
+    }
 };
 
 const Vector3d UP_VECTOR_3D     = Vector3d( 0,-1, 0);

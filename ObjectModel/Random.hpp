@@ -21,7 +21,7 @@ class Random
     static int getSingleInt() { return getSingleInt(0, INT_MAX); }
 
 
-    static std::vector<int> getManyInt();
+    // static std::vector<int> getManyInt();
 
     
     static double getSingleDouble(double minValue, double maxValue)
@@ -31,7 +31,7 @@ class Random
     static double getSingleDouble(double maxValue) { return getSingleDouble(0, maxValue); }
     static double getSingleDouble() { return getSingleDouble(0, __DBL_MAX__); }
 
-    static std::vector<double> getManyDouble();
+    // static std::vector<double> getManyDouble();
 
 };
 

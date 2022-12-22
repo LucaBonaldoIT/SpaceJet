@@ -5,6 +5,10 @@
 #include "Node.hpp"
 #include "Star.hpp"
 #include "Tensor.hpp"
+#include "Player.hpp"
+#include "Logger.hpp"
+#include <math.h>
+#include <algorithm>
 
 //const Tensor rotationMatrix = Tensor::getRotationMatrix3d(0.0001f);
 
@@ -13,10 +17,14 @@ class Starfield
 
     private:
 
-    static inline int STAR_NUM = 170;
+    static inline int STAR_NUM = 1;
 
     static inline std::vector <Node*> _stars;
-    const static Tensor rotationMatrix;
+    static inline float _expansionSpeed = 1.003;
+    static inline float _rotationSpeed = 0.0006f;
+    const static Tensor RotationMatrix;
+    static inline Vector3d _rotationPivot;
+    
 
     public:
 
@@ -32,31 +40,39 @@ class Starfield
         }
     }
 
-    static Vector3d rotateAround(Vector3d position, Vector3d pivot, const float degrees)
+    static Vector3d rotateAround(Vector3d position, Vector3d pivot)
     {
         position = position - pivot;
         position.z = 1;
-        Tensor newPositionTensor = rotationMatrix * position;
-        Vector3d newPosition(newPositionTensor.at(0, 0), newPositionTensor.at(1, 0), newPositionTensor.at(2, 0));
+        Tensor newPositionTensor = RotationMatrix * position;
+        Vector3d newPosition = (Vector3d)newPositionTensor;
         newPosition = newPosition + pivot;
         return newPosition;
     }
 
     static void updateStars()
     {
+        _rotationPivot = Player::getInstance()->getPosition();
+        Logger::log(_rotationPivot);
+
         for (int i = 0; i < STAR_NUM; i++)
         {
-            auto pos = _stars[i]->getPosition() * 1.0001;
+            Vector3d starInitialPosition = _stars[i]->getPosition();
 
-            pos = rotateAround(pos, Vector3d(640, 360, 0), 0.00005f);
+            // Traslate star
+            Vector3d starMovement = _stars[i]->getPosition() - _rotationPivot;
+            starMovement = starMovement / starMovement.module();
+            auto pos = _stars[i]->getPosition() + ((starMovement * _expansionSpeed) / starInitialPosition.z);
 
-            //pos = pos - Vector3d(640, 360, 0);
+            // Star rotation
+            pos = rotateAround(pos, _rotationPivot);
+            pos.z = std::max(1.0f, starInitialPosition.z - 0.001f);
 
-            if(pos.x > 1280 || pos.y > 1280)
+            if(pos.x > Game::WindowWidth || pos.y > Game::WindowHeight)
             {
-                pos.x = rand() % 1280;
-                pos.y = rand() % 1280;    
-                pos.z = 1280;   
+                pos.x = rand() % Game::WindowWidth;
+                pos.y = rand() % Game::WindowHeight;    
+                pos.z = 3;   
             }
              
             _stars[i]->setPosition(pos);
@@ -68,7 +84,7 @@ class Starfield
             // new_pos_vector = new_pos_vector + Vector3d(640, 360, 0);
             // _stars[i]->setPosition(new_pos_vector);
 
-            pos.z--;
+            //pos.z--;
             _stars[i]->setRatio(std::min(3000.0/pos.z, 2.0));
 
         }

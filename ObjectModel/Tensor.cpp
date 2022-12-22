@@ -220,3 +220,9 @@ Tensor Tensor::getRotationMatrix3d(const float degree)
 
     return rotationMatrix;
 }
+
+Tensor::operator Vector3d() const
+{
+    return Vector3d(this->at(0, 0), this->at(1, 0), this->at(2, 0));
+}
+

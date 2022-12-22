@@ -16,8 +16,8 @@ class Star : public Node
     const int SpawnHeightMin = 0;
     const int SpawnHeightMax = Game::WindowHeight;
 
-    const int SpawnZMin = 0;
-    const int SpawnZMax = Game::WindowHeight;
+    const int SpawnZMin = 2;
+    const int SpawnZMax = 3;
 
     public: 
     
