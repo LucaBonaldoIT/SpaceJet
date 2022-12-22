@@ -19,8 +19,8 @@ void Node::updatePhysics(DeltaTime dt)
     // _force = Vector3d();
 
     // ???
-    _velocity = _velocity + _force / _mass;
-    _position = _position + _velocity;
+    _velocity = _velocity + ((_force / _mass) * dt);
+    _position = _position + ((_velocity) * dt);
     _force = Vector3d();
 
     return;
