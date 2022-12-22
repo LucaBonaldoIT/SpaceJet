@@ -17,7 +17,7 @@ class Star : public Node
     const int SpawnHeightMax = Game::WindowHeight;
 
     const int SpawnZMin = 0;
-    const int SpawnZtMax = Game::WindowHeight;
+    const int SpawnZMax = Game::WindowHeight;
 
     public: 
     
@@ -30,7 +30,7 @@ class Star : public Node
 
         _position.x = Random::getSingleInt(SpawnWidthMin, SpawnWidthMax);
         _position.y = Random::getSingleInt(SpawnHeightMin, SpawnHeightMax);
-        _position.z = Random::getSingleInt(SpawnZMin, SpawnZtMax);
+        _position.z = Random::getSingleInt(SpawnZMin, SpawnZMax);
 
     }
     

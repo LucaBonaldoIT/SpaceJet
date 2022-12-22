@@ -33,6 +33,6 @@ class Random
 
     static std::vector<double> getManyDouble();
 
-}
+};
 
 #endif
