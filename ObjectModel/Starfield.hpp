@@ -8,19 +8,23 @@
 #include "Node.hpp"
 #include "Player.hpp"
 #include "Star.hpp"
+#include <string>
 
 class Starfield
 {
 
     private:
 
-    static inline int STAR_NUM = 1;
+    static inline int STAR_NUM = 150;
 
     static inline std::vector <Node*> _stars;
     static inline float _expansionSpeed = 1.003;
     static inline float _rotationSpeed = 0.0006f;
     const static Tensor RotationMatrix;
     static inline Vector3d _rotationPivot;
+    
+    static const size_t BorderSpawnWidth = 200;  // "Border" of spawn window
+    static const size_t BorderSpawnHeight = 100; 
     
 
     public:
@@ -50,7 +54,7 @@ class Starfield
     static void updateStars()
     {
         _rotationPivot = Player::getInstance()->getPosition();
-        Logger::log(_rotationPivot);
+        //Logger::log(_rotationPivot);
 
         for (int i = 0; i < STAR_NUM; i++)
         {
@@ -65,11 +69,16 @@ class Starfield
             pos = rotateAround(pos, _rotationPivot);
             pos.z = std::max(1.0f, starInitialPosition.z - 0.001f);
 
-            if(pos.x > Game::WindowWidth || pos.y > Game::WindowHeight)
+            if(pos.x > Game::WindowWidth || pos.y > Game::WindowHeight || pos.x < 0 || pos.y < 0)
             {
-                pos.x = rand() % Game::WindowWidth;
-                pos.y = rand() % Game::WindowHeight;    
+                pos.x = abs(rand()) % ((Game::WindowWidth - BorderSpawnWidth) + BorderSpawnWidth);
+                pos.y = abs(rand()) % ((Game::WindowHeight - BorderSpawnHeight) + BorderSpawnHeight);    
                 pos.z = 3;   
+
+                Logger::log("Star teleported from");
+                Logger::log((std::string)starInitialPosition);
+                Logger::log("to");
+                Logger::log((std::string)pos);
             }
              
             _stars[i]->setPosition(pos);

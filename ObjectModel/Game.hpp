@@ -9,8 +9,8 @@ namespace Game
 
     const std::string WindowTitle = "Game";
 
-    const int WindowWidth = 1280;
-    const int WindowHeight = 720; 
+    const size_t WindowWidth = 1280;
+    const size_t WindowHeight = 720; 
 
 
 
