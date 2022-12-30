@@ -19,6 +19,7 @@ class Starfield
 
     static inline std::vector <Node*> _stars;
     static inline float _expansionSpeed = 1.003;
+    //static inline float _expansionSpeed = 0;
     static inline float _rotationSpeed = 0.0006f;
     const static Tensor RotationMatrix;
     static inline Vector3d _rotationPivot;
@@ -58,7 +59,9 @@ class Starfield
 
         for (int i = 0; i < STAR_NUM; i++)
         {
-            Vector3d starInitialPosition = _stars[i]->getPosition();
+            Node* star = _stars[i];
+            Vector3d starInitialPosition = star->getPosition();
+            
 
             // Traslate star
             Vector3d starMovement = starInitialPosition - _rotationPivot;   // Distance vector from the rotation point
@@ -69,29 +72,25 @@ class Starfield
             pos = rotateAround(pos, _rotationPivot);
             pos.z = std::max(1.0f, starInitialPosition.z - 0.001f);
 
-            if(pos.x > Game::WindowWidth || pos.y > Game::WindowHeight || pos.x < 0 || pos.y < 0)
+
+            if (star->isOutOfBounds())
             {
-                pos.x = abs(rand()) % ((Game::WindowWidth - BorderSpawnWidth) + BorderSpawnWidth);
-                pos.y = abs(rand()) % ((Game::WindowHeight - BorderSpawnHeight) + BorderSpawnHeight);    
+                // Replace the node inside the bounds
+
+                // Move star "just a bit outside" the screen
+                pos.x = Random::getSingleInt(-BorderSpawnWidth, Game::WindowWidth + BorderSpawnWidth);
+                pos.y = Random::getSingleInt(-BorderSpawnHeight, Game::WindowHeight + BorderSpawnHeight);
                 pos.z = 3;   
 
-                Logger::log("Star teleported from");
-                Logger::log((std::string)starInitialPosition);
-                Logger::log("to");
-                Logger::log((std::string)pos);
+                // Logger::log("Star teleported from");
+                // Logger::log((std::string)starInitialPosition);
+                // Logger::log("to");
+                // Logger::log((std::string)pos);
             }
              
-            _stars[i]->setPosition(pos);
-
-            // Tensor rotationMatrix = Tensor::getRotationMatrix3d(0.0001f);
-            // pos.z = 1;
-            // auto new_pos = rotationMatrix * pos;
-            // Vector3d new_pos_vector(new_pos.at(0, 0), new_pos.at(1, 0), new_pos.at(2, 0));
-            // new_pos_vector = new_pos_vector + Vector3d(640, 360, 0);
-            // _stars[i]->setPosition(new_pos_vector);
-
-            //pos.z--;
-            _stars[i]->setRatio(std::min(3000.0/pos.z, 2.0));
+            // Update star
+            star->setPosition(pos);
+            star->setRatio(std::min(3000.0/pos.z, 2.0));
 
         }
     }

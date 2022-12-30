@@ -26,6 +26,8 @@ class Star : public Node
         
         _widthRatio = 1.0f;
         _heightRatio = 1.0f;
+        _width = 8;
+        _height = 8;
 
         _position.x = Random::getSingleInt(SpawnWidthMin, SpawnWidthMax);
         _position.y = Random::getSingleInt(SpawnHeightMin, SpawnHeightMax);

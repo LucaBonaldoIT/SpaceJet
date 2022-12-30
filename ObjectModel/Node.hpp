@@ -4,6 +4,7 @@
 #include "Vector3d.hpp"
 #include "DeltaTime.hpp"
 #include "Types.hpp"
+#include "Game.hpp"
 
 struct SpriteInfo
 {
@@ -51,8 +52,8 @@ class Node
 
         // ------------- Sprites info -------------
         SpriteInfo getSpriteInfo();
-        Ratio getWidthRatio(){return _widthRatio;}
-        Ratio getHeightRatio(){return _heightRatio;}
+        // Ratio getWidthRatio(){return _widthRatio;}
+        // Ratio getHeightRatio(){return _heightRatio;}
         size_t getWidth(){return _width;}
         size_t getHeight(){return _height;}
 
@@ -71,6 +72,9 @@ class Node
         void applyImpulse(Vector3d);
         void applyVelocity(Vector3d);
         void setVelocity(Vector3d);
+
+        // 
+        bool isOutOfBounds();
 };
 
 #endif

@@ -14,6 +14,8 @@ class Player : public Node
         _spriteInfo = SpriteInfo("player");
         _widthRatio = 3.0f;
         _heightRatio = 3.0f;
+        _width = _widthRatio * 125;
+        _height = _heightRatio * 115;
     }
     public:
 

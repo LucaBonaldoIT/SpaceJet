@@ -61,3 +61,10 @@ void Node::setPosition(Vector3d position)
 {
     _position = position;
 }
+
+bool Node::isOutOfBounds()
+{return _position.x > Game::WindowWidth || 
+        _position.y > Game::WindowHeight || 
+        _position.x < 0 ||
+        _position.y < 0;
+}

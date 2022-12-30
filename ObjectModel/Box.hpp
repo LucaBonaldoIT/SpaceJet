@@ -13,7 +13,6 @@ class Box
         Box(Vector3d& position, Vector3d dimensions);
 
     virtual bool isCollidingWith(Box&);
-    virtual bool isOutOfBounds();
 };
 
 #endif

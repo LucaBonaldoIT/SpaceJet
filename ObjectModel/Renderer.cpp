@@ -104,13 +104,17 @@ void Renderer::draw(std::vector<Node*> nodes)
 
         SDL_QueryTexture(this->sprites.at(node->getSpriteInfo().id), NULL, NULL, &rect.w, &rect.h);
 
-        //rect.w /= 3;
-        //rect.h /= 3;
-
-
         // Updates rect width and height before copying to the SDL renderer
-        rect.w *= node->getWidthRatio();
-        rect.h *= node->getHeightRatio();
+        //rect.w *= node->getWidthRatio();
+        //rect.h *= node->getHeightRatio();
+
+        // Set texture size
+        rect.w = node->getWidth();
+        rect.h = node->getHeight();
+
+        // Align texture center to position
+        rect.x -= (rect.w / 2);
+        rect.y -= (rect.h / 2);
 
         SDL_RenderCopy(this->renderer,
                        this->sprites.at(node->getSpriteInfo().id),
