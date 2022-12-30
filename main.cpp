@@ -98,6 +98,7 @@ int main(int argc, char * argv[])
 
 	    start = std::chrono::steady_clock::now();
 
+		// Update physics multiple times per frame while there's still time
 		while(frameTime > 0.0)
 		{
 			while(SDL_PollEvent(&event))
@@ -105,6 +106,7 @@ int main(int argc, char * argv[])
 				engine->processEvent(&event);
 			}
 
+			// Upper bound for delta time
 			dt = std::min(frameTime, maxDt);
 
 			engine->updatePhysics(dt);
@@ -114,7 +116,7 @@ int main(int argc, char * argv[])
 		engine->renderFrame();
 
 		end = std::chrono::steady_clock::now();
-		frameTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000000000.0;
+		frameTime = std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / 1000000000.0;	// Normalize in seconds
 	}
 
 	Logger::log("Exiting game loop...");

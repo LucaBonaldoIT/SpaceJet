@@ -69,7 +69,9 @@ void Controller::processInput(KeyboardState state)
         }
     }
 
+    // Normalize avoiding zero division
     res = res / (res.module() > 0 ? res.module() : 1);
+    // Multiplying normalized vector for player speed
     res = res * Player::getInstance()->getDefaultSpeed();
 
     Player::getInstance()->setVelocity(res);
