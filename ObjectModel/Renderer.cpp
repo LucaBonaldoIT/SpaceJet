@@ -102,13 +102,6 @@ void Renderer::draw(std::vector<Node*> nodes)
         rect.x = node->getPosition().x;
         rect.y = node->getPosition().y;
 
-        SDL_QueryTexture(this->sprites.at(node->getSpriteInfo().id), NULL, NULL, &rect.w, &rect.h);
-
-        // Updates rect width and height before copying to the SDL renderer
-        //rect.w *= node->getWidthRatio();
-        //rect.h *= node->getHeightRatio();
-
-        // Set texture size
         rect.w = node->getWidth();
         rect.h = node->getHeight();
 

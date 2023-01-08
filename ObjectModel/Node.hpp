@@ -1,6 +1,8 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <SDL2/SDL.h>
+
 #include "Vector3d.hpp"
 #include "DeltaTime.hpp"
 #include "Types.hpp"
@@ -41,8 +43,8 @@ class Node
         // Sprite size ratio of this instance sprite to original image
         float _widthRatio;
         float _heightRatio;
-        size_t _width;
-        size_t _height;        
+        size_t _width = 1;
+        size_t _height = 1;        
 
     public:
 
