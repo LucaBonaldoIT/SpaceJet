@@ -27,9 +27,9 @@ void Starfield::updateStars(DeltaTime dt)
     _rotationPivot = Player::getInstance()->getPosition();
     //Logger::log(_rotationPivot);
 
-    for (int i = 0; i < STAR_NUM; i++)
+    for (auto it = _stars.begin(); it != _stars.end(); it++)
     {
-        Node* star = _stars[i];
+        Node* star = (*it);
         math::Vector3d starInitialPosition = star->getPosition();
         math::Vector3d starFinalPosition;
 
