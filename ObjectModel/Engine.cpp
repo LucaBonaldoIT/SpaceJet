@@ -60,7 +60,9 @@ Engine::Engine()
         return;
     }
 
-    Starfield::generateStars();
+
+    // Load specific field instance
+    field = std::unique_ptr<Field>(new Starfield());
 
     // Setup renderer and set running state
     this->renderer = Renderer::getInstance(this->window);
@@ -98,7 +100,7 @@ std::vector<Node*> Engine::getNodes()
 void Engine::updatePhysics(DeltaTime dt)
 {
     
-    Starfield::updateStars(dt);
+    field->updateField(dt);
 
     for (auto it = Engine::_nodes.begin(); it != Engine::_nodes.end(); it++)
     {
@@ -112,7 +114,7 @@ void Engine::renderFrame()
 {
 
     this->renderer->getInstance()->clear();
-    this->renderer->getInstance()->draw(Starfield::getStars());
+    this->renderer->getInstance()->draw(field->getFieldNodes());
     this->renderer->getInstance()->draw(this->_nodes);
     this->renderer->getInstance()->update();
 

@@ -3,44 +3,47 @@
 
 #include <vector>
 #include <algorithm>
+#include <string>
 
 #include "Common.hpp"
 #include "Node.hpp"
 #include "Player.hpp"
 #include "Star.hpp"
-#include <string>
+#include "Field.hpp"
 
-class Starfield
+class Starfield : public Field
 {
 
     private:
 
-    static inline int STAR_NUM = 150;
+    int STAR_NUM = 150;
 
-    static inline std::vector <Node*> _stars;
-    static inline float _expansionSpeed = 300.0f;    //1.003
-    static inline float _rotationSpeed = 700.0f;
-    //static inline float _expansionSpeed = 0;
-    const static Tensor RotationMatrix;
-    static inline Vector3d _rotationPivot;
+    std::vector <Node*> _stars;
+    float _expansionSpeed = 300.0f;    //1.003
+    float _rotationSpeed = 700.0f;
+        //const static Tensor RotationMatrix;
+    Vector3d _rotationPivot;
     
-    static const size_t BorderSpawnWidth = 200;  // "Border" of spawn window
-    static const size_t BorderSpawnHeight = 100; 
+    const size_t BorderSpawnWidth = 200;  // "Border" of spawn window
+    const size_t BorderSpawnHeight = 100; 
     
 
     public:
 
     Starfield()
     {
-        
+        this->generateStars();
+        Logger::log("Starfield instantiated.");
     }
 
-    static void generateStars();
+    void generateStars();
 
-    static Vector3d rotateAround(Vector3d position, Vector3d pivot, DeltaTime dt);
-    static void updateStars(DeltaTime dt);
+    Vector3d rotateAround(Vector3d position, Vector3d pivot, DeltaTime dt);
+    virtual void updateField(DeltaTime dt);
+    virtual std::vector<Node*> getFieldNodes();
+    void updateStars(DeltaTime dt);
 
-    static std::vector <Node*> getStars();
+    std::vector <Node*> getStars();
 
 
 };

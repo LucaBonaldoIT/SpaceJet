@@ -2,6 +2,7 @@
 #define ENGINE_H
 
 #include <vector>
+#include <memory>
 
 #include "Common.hpp"
 #include "Renderer.hpp"
@@ -9,6 +10,7 @@
 #include "Node.hpp"
 #include "Player.hpp"
 #include "Starfield.hpp"
+#include "Field.hpp"
 
 enum EngineState {
 
@@ -34,6 +36,9 @@ class Engine
     static inline std::vector<Node*> _nodes;
 
     static inline EngineState _state;
+
+    // Field instance pointer loaded into the engine
+    std::unique_ptr<Field> field;
 
     Engine();
 

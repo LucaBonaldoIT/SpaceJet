@@ -1,6 +1,16 @@
 #include "Starfield.hpp"
 
-const Tensor Starfield::RotationMatrix = Tensor::getRotationMatrix3d(_rotationSpeed);
+//const Tensor Starfield::RotationMatrix = Tensor::getRotationMatrix3d(_rotationSpeed);
+
+void Starfield::updateField(DeltaTime dt)
+{
+    this->updateStars(dt);
+}
+
+std::vector<Node*> Starfield::getFieldNodes()
+{
+    return this->getStars();
+}
 
 void Starfield::generateStars() 
 {
