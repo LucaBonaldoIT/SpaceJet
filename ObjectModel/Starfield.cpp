@@ -2,6 +2,8 @@
 
 //const Tensor Starfield::RotationMatrix = Tensor::getRotationMatrix3d(_rotationSpeed);
 
+
+// Adapted original name for lazynessssssssssssssss
 void Starfield::updateField(DeltaTime dt)
 {
     this->updateStars(dt);
@@ -28,11 +30,11 @@ void Starfield::updateStars(DeltaTime dt)
     for (int i = 0; i < STAR_NUM; i++)
     {
         Node* star = _stars[i];
-        Vector3d starInitialPosition = star->getPosition();
-        Vector3d starFinalPosition;
+        math::Vector3d starInitialPosition = star->getPosition();
+        math::Vector3d starFinalPosition;
 
         // Star expansion
-        Vector3d starExpansion = starInitialPosition - _rotationPivot;   // Distance vector from the rotation point
+        math::Vector3d starExpansion = starInitialPosition - _rotationPivot;   // Distance vector from the rotation point
         starExpansion = starExpansion.normalized();            
         starFinalPosition = starInitialPosition + ((starExpansion * _expansionSpeed) / starInitialPosition.z) * dt;
 
@@ -56,19 +58,19 @@ void Starfield::updateStars(DeltaTime dt)
     }
 }
 
-Vector3d Starfield::rotateAround(Vector3d position, Vector3d pivot, DeltaTime dt)
+math::Vector3d Starfield::rotateAround(math::Vector3d position, math::Vector3d pivot, DeltaTime dt)
 {
     // Old rotation code with matrix multiplication
     // position = position - pivot;
     // position.z = 1;
     // Tensor newPositionTensor = RotationMatrix * position;
-    // Vector3d newPosition = (Vector3d)newPositionTensor;
+    // math::Vector3d newPosition = (math::Vector3d)newPositionTensor;
     // newPosition = newPosition + pivot;
     // return newPosition;
 
-    Vector3d radius = position - pivot;
+    math::Vector3d radius = position - pivot;
     // Moves perpendiculary to the radius vector. The movement is normalized and multiplied by rotation speed and the delta time
-    Vector3d newPosition = position + radius.perpendicularClockwise().normalized() * _rotationSpeed * dt;
+    math::Vector3d newPosition = position + radius.perpendicularClockwise().normalized() * _rotationSpeed * dt;
     return newPosition;
 }
 

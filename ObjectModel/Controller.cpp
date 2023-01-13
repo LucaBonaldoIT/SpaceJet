@@ -23,7 +23,7 @@ void Controller::bind(std::string action, int keyCode)
 void Controller::processInput(KeyboardState state)
 {
 
-    Vector3d res = Vector3d();
+    math::Vector3d res = math::Vector3d();
 
     for ( const auto &[key, value] : _actionsByKeyCode ) {
    
@@ -32,7 +32,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + DOWN_VECTOR_3D;
+                res = res + math::DOWN_VECTOR_3D;
 
             }
             continue;
@@ -42,7 +42,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + UP_VECTOR_3D;
+                res = res + math::UP_VECTOR_3D;
 
             }
             continue;
@@ -52,7 +52,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + LEFT_VECTOR_3D;
+                res = res + math::LEFT_VECTOR_3D;
 
             }
             continue;
@@ -62,7 +62,7 @@ void Controller::processInput(KeyboardState state)
         {
             if (state[value])
             {
-                res = res + RIGHT_VECTOR_3D;
+                res = res + math::RIGHT_VECTOR_3D;
 
             }
             continue;

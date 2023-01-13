@@ -3,6 +3,8 @@
 #include <iostream>
 #include <math.h>
 
+using namespace math;
+
 Tensor::Tensor(size_t _rows, size_t _columns)
 {
     rows = _rows;

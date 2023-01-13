@@ -8,6 +8,9 @@ class Player : public Node
 {
     private:
 
+    Speed _defaultSpeed = 1000;
+    Speed _maxSpeed = 1000;
+
     static Player* _instance;
     Player()
     {
@@ -23,12 +26,12 @@ class Player : public Node
 
     Speed getDefaultSpeed()
     {
-        return 1000;
+        return _defaultSpeed;
     }
 
     Speed getMaxSpeed()
     {
-        return 1000;
+        return _maxSpeed;
     }
 };
 

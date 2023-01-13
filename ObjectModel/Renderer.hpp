@@ -74,7 +74,7 @@ class Renderer
 
     static Renderer* _instance;
 
-    Vector2d projectVector(Vector3d);   //???
+    math::Vector2d projectVector(math::Vector3d);   //???
 
     public:
 

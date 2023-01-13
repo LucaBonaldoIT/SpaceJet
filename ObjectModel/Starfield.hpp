@@ -22,7 +22,7 @@ class Starfield : public Field
     float _expansionSpeed = 300.0f;    //1.003
     float _rotationSpeed = 700.0f;
         //const static Tensor RotationMatrix;
-    Vector3d _rotationPivot;
+    math::Vector3d _rotationPivot;
     
     const size_t BorderSpawnWidth = 200;  // "Border" of spawn window
     const size_t BorderSpawnHeight = 100; 
@@ -38,7 +38,7 @@ class Starfield : public Field
 
     void generateStars();
 
-    Vector3d rotateAround(Vector3d position, Vector3d pivot, DeltaTime dt);
+    math::Vector3d rotateAround(math::Vector3d position, math::Vector3d pivot, DeltaTime dt);
     virtual void updateField(DeltaTime dt);
     virtual std::vector<Node*> getFieldNodes();
     void updateStars(DeltaTime dt);

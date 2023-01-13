@@ -30,10 +30,10 @@ struct SpriteInfo
 class Node
 {
     protected:
-        Vector3d _position;
-        Vector3d _velocity;
-        Vector3d _acceleration;
-        Vector3d _force;
+        math::Vector3d _position;
+        math::Vector3d _velocity;
+        math::Vector3d _acceleration;
+        math::Vector3d _force;
 
         Mass _mass;
         Inertia _inertia;
@@ -66,14 +66,14 @@ class Node
         virtual Speed getMaxSpeed() = 0;
         virtual Speed getDefaultSpeed() = 0;
 
-        Vector3d getPosition();
-        void setPosition(Vector3d);
+        math::Vector3d getPosition();
+        void setPosition(math::Vector3d);
 
         void updatePhysics(DeltaTime);
-        void applyForce(Vector3d);
-        void applyImpulse(Vector3d);
-        void applyVelocity(Vector3d);
-        void setVelocity(Vector3d);
+        void applyForce(math::Vector3d);
+        void applyImpulse(math::Vector3d);
+        void applyVelocity(math::Vector3d);
+        void setVelocity(math::Vector3d);
 
         // 
         bool isOutOfBounds();

@@ -4,27 +4,27 @@
 #include <cmath>
 #include "Types.hpp"
 
-struct Vector2d
+namespace math
 {
-    Point x;
-    Point y;
-
-    inline Point module() const
+    struct Vector2d
     {
-        return sqrt(this->energy());
-    }
+        Point x;
+        Point y;
 
-    inline Point energy() const
-    {
-        return x*x + y*y;
-    }
+        inline Point module() const
+        {
+            return sqrt(this->energy());
+        }
 
-    Vector2d(Point _x, Point _y) : x{_x}, y{_y}
-    {
-    }
+        inline Point energy() const
+        {
+            return x*x + y*y;
+        }
 
-
-
-};
+        Vector2d(Point _x, Point _y) : x{_x}, y{_y}
+        {
+        }
+    };
+}
 
 #endif
