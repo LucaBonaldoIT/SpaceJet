@@ -98,7 +98,7 @@ std::vector<Node*> Engine::getNodes()
 void Engine::updatePhysics(DeltaTime dt)
 {
     
-    Starfield::updateStars();
+    Starfield::updateStars(dt);
 
     for (auto it = Engine::_nodes.begin(); it != Engine::_nodes.end(); it++)
     {

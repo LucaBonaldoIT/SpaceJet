@@ -4,6 +4,7 @@
 #include <cmath>
 #include <sstream>
 #include "Types.hpp"
+#include "Vector2d.hpp"
 
 struct Vector3d
 {
@@ -48,6 +49,17 @@ struct Vector3d
     Vector3d operator/(const Point& other)
     {
         return Vector3d(x / other, y / other, z / other);
+    }
+
+
+    inline Vector3d perpendicularClockwise() const 
+    {
+        return Vector3d(y, -x, z);
+    }
+
+    inline Vector3d normalized() const
+    {
+        return Vector3d(x, y, z) / this->module();
     }
 
 

@@ -15,12 +15,12 @@ class Starfield
 
     private:
 
-    static inline int STAR_NUM = 0;
+    static inline int STAR_NUM = 150;
 
     static inline std::vector <Node*> _stars;
-    static inline float _expansionSpeed = 1.003;
+    static inline float _expansionSpeed = 300.0f;    //1.003
+    static inline float _rotationSpeed = 700.0f;
     //static inline float _expansionSpeed = 0;
-    static inline float _rotationSpeed = 0.0006f;
     const static Tensor RotationMatrix;
     static inline Vector3d _rotationPivot;
     
@@ -37,8 +37,8 @@ class Starfield
 
     static void generateStars();
 
-    static Vector3d rotateAround(Vector3d position, Vector3d pivot);
-    static void updateStars();
+    static Vector3d rotateAround(Vector3d position, Vector3d pivot, DeltaTime dt);
+    static void updateStars(DeltaTime dt);
 
     static std::vector <Node*> getStars();
 
