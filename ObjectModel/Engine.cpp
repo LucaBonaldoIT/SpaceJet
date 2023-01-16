@@ -12,7 +12,7 @@ Engine* Engine::initialize()
 
     Logger::log("Initializing SDL2...");
 
-    auto err = SDL_Init(SDL_INIT_EVERYTHING);
+    auto err = SDL_Init(SDL_INIT_EVERYTHING | SDL_INIT_AUDIO);
 
     if (err == 0)
     {
@@ -29,6 +29,8 @@ Engine* Engine::initialize()
     return this;
 
 }
+
+
 
 void Engine::updateGameState(GameState gameState)
 {
@@ -57,9 +59,13 @@ Engine::Engine()
                                     Game::WindowWidth, Game::WindowHeight, 0);
 
 
+
+    // Initialize game nodes
     Engine::_nodes = std::vector<Node*>({
         Player::getInstance()
     });
+    // Initiliaze menu nodes
+    this->initializeMenu();
 
     if (window == nullptr)
     {
@@ -76,6 +82,15 @@ Engine::Engine()
     Logger::log("Renderer istantiated.");
     Engine::_state = EngineState::EngineRunning;
 
+    this->audioPlayer = AudioPlayer::getInstance();
+
+}
+
+void Engine::initializeMenu()
+{
+    _menuNodes = std::vector<Node*>({
+        new Button("resumeButton", math::Vector2d(Game::WindowWidth / 2 - 75, Game::WindowHeight / 2 - 50), math::Vector2d(150, 100))
+    });
 }
 
 Engine::~Engine()
@@ -122,11 +137,11 @@ void Engine::renderFrame()
 
     this->renderer->getInstance()->clear();
     this->renderer->getInstance()->draw(field->getFieldNodes());
-    this->renderer->getInstance()->draw(this->_nodes);
+    this->renderer->getInstance()->draw(_nodes);
 
     if (_currentGameState == GameState::GamePaused)
     {
-        ;
+        this->renderer->getInstance()->draw(_menuNodes);
     }
     this->renderer->getInstance()->update();
 

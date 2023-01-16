@@ -75,6 +75,7 @@ void Controller::processInput(KeyboardState state)
             {
                 auto instance = Engine::getInstance();
                 instance->updateGameState(instance->getCurrentGameState() == GameState::GameRunning ? GameState::GamePaused : GameState::GameRunning);
+                instance->playSound("click");
             }
             continue;
         }

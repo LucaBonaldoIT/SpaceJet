@@ -32,6 +32,8 @@ void Renderer::loadSprites()
             loadTextureFromFile(this->renderer,
                                 spriteList.getSpritePath(sprite).c_str())
         });
+
+        Logger::log("Loaded sprite: " + sprite);
     }
 }
 

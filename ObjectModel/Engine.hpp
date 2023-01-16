@@ -11,7 +11,8 @@
 #include "Player.hpp"
 #include "Starfield.hpp"
 #include "Field.hpp"
-
+#include "Button.hpp"
+#include "AudioPlayer.hpp"
 
 enum GameState
 {
@@ -43,14 +44,19 @@ class Engine
     static inline GameState _previousGameState;
 
 
+    AudioPlayer* audioPlayer;
 
     Engine* initialize();
+
+    void initializeMenu();
 
     SDL_Window* window;
 
     Renderer* renderer;
 
+    // ---------- Engine nodes ----------
     static inline std::vector<Node*> _nodes;
+    static inline std::vector<Node*> _menuNodes;
 
 
     // Field instance pointer loaded into the engine
@@ -75,6 +81,8 @@ class Engine
 
     void updatePhysics(DeltaTime dt);
     void renderFrame();
+
+    void playSound(std::string sound) { this->audioPlayer->play(sound); }
 
     bool isRunning();
 
