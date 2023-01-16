@@ -12,6 +12,16 @@
 #include "Starfield.hpp"
 #include "Field.hpp"
 
+
+enum GameState
+{
+    GameError = -1,
+    GameMainMenu = 0,
+    GameRunning = 1,
+    GamePaused = 2
+
+};
+
 enum EngineState {
 
     EngineError = -1,
@@ -27,6 +37,13 @@ class Engine
 
     private:
 
+    //  ------------- States -------------
+    static inline EngineState _state;
+    static inline GameState _currentGameState;
+    static inline GameState _previousGameState;
+
+
+
     Engine* initialize();
 
     SDL_Window* window;
@@ -35,7 +52,6 @@ class Engine
 
     static inline std::vector<Node*> _nodes;
 
-    static inline EngineState _state;
 
     // Field instance pointer loaded into the engine
     std::unique_ptr<Field> field;
@@ -53,12 +69,17 @@ class Engine
     static Engine* getInstance();
     std::vector<Node*> getNodes();
 
+    void updateGameState(GameState);
+    
     void processEvent(SDL_Event*);
 
     void updatePhysics(DeltaTime dt);
     void renderFrame();
 
     bool isRunning();
+
+    GameState getCurrentGameState(){return _currentGameState;}
+    GameState getPreviousGameState(){return _previousGameState;}
 
 };
 

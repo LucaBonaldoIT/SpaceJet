@@ -7,84 +7,10 @@
 
 int main(int argc, char * argv[])
 {
-	// Tensor t1(2, 3);
-	// t1.at(0,0)=1;
-	// t1.at(0,1)=2;
-	// t1.at(0,2)=3;
-	// t1.at(1,0)=4;
-	// t1.at(1,1)=5;
-	// t1.at(1,2)=6;
-	// Logger::log(t1.toString());
-	// Logger::log(t1.transposed().toString());
-	// Logger::log("\n");
-	// Tensor t2(3, 2);
-	// t2.at(0,0)=10;
-	// t2.at(0,1)=11;
-	// t2.at(1,0)=20;
-	// t2.at(1,1)=21;
-	// t2.at(2,0)=30;
-	// t2.at(2,1)=31	// Tensor t1(2, 3);
-	// t1.at(0,0)=1;
-	// t1.at(0,1)=2;
-	// t1.at(0,2)=3;
-	// t1.at(1,0)=4;
-	// t1.at(1,1)=5;
-	// t1.at(1,2)=6;
-	// Logger::log(t1.toString());
-	// Logger::log(t1.transposed().toString());
-	// Logger::log("\n");
-	// Tensor t2(3, 2);
-	// t2.at(0,0)=10;
-	// t2.at(0,1)=11;
-	// t2.at(1,0)=20;
-	// t2.at(1,1)=21;
-	// t2.at(2,0)=30;
-	// t2.at(2,1)=31;
-	// Logger::log(t2.toString());
-	// Logger::log(t2.transposed().toString());
-	// Logger::log("\n");
-
-	// Tensor p = t1*t2;
-	// Logger::log(p.toString());
-
-	// Logger::log(p.transposed().toString());
-	// Logger::log((p*10).toString());
-	// Logger::log("here");
-
-	// p.resize(3, 1);
-	// Logger::log(p.toString());
-
-	// return 0;;
-	// Logger::log(t2.toString());
-	// Logger::log(t2.transposed().toString());
-	// Logger::log("\n");
-
-	// Tensor p = t1*t2;
-	// Logger::log(p.toString());
-
-	// Logger::log(p.transposed().toString());
-	// Logger::log((p*10).toString());
-	// Logger::log("here");
-
-	// p.resize(3, 1);
-	// Logger::log(p.toString());
-
-	// return 0;
-
 	Engine* engine = Engine::getInstance();
 
-	// Non funziona WTF!??
-	// if (engine == nullptr)
-	// {
-	// 	Logger::log("Error during engine!");
-	// 	throw EngineNotIstantiatedException("Error during instantiation of engine"); // To-do: better msg
-	// }
-
 	Logger::log("Engine istantiated.");
-
 	SDL_Event event;
-
-
 	Logger::log("Entering game loop...");
 
 	auto start = std::chrono::steady_clock::now();
@@ -98,18 +24,35 @@ int main(int argc, char * argv[])
 
 	    start = std::chrono::steady_clock::now();
 
+		while(SDL_PollEvent(&event))
+		{
+			engine->processEvent(&event);
+		}
+
 		// Update physics multiple times per frame while there's still time
 		while(frameTime > 0.0)
 		{
-			while(SDL_PollEvent(&event))
-			{
-				engine->processEvent(&event);
-			}
-
 			// Upper bound for delta time
 			dt = std::min(frameTime, maxDt);
 
-			engine->updatePhysics(dt);
+			// 
+			switch (engine->getCurrentGameState())
+			{
+				case GameState::GameMainMenu:
+					break;
+
+
+				case GameState::GameRunning:
+					engine->updatePhysics(dt);
+					break;
+
+				case GameState::GamePaused:
+
+					break;
+			}
+
+
+
 			frameTime -= dt;
 		}
 

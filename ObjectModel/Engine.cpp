@@ -23,9 +23,17 @@ Engine* Engine::initialize()
     Logger::log("Initializing SDL2...");
 
     Engine::_state = EngineState::EngineInitialized;
+    Engine::_previousGameState = GameState::GameError;
+    Engine::_currentGameState = GameState::GameMainMenu;
 
     return this;
 
+}
+
+void Engine::updateGameState(GameState gameState)
+{
+    _previousGameState = _currentGameState;
+    _currentGameState = gameState;
 }
 
 Engine* Engine::getInstance()
@@ -115,6 +123,11 @@ void Engine::renderFrame()
     this->renderer->getInstance()->clear();
     this->renderer->getInstance()->draw(field->getFieldNodes());
     this->renderer->getInstance()->draw(this->_nodes);
+
+    if (_currentGameState == GameState::GamePaused)
+    {
+        ;
+    }
     this->renderer->getInstance()->update();
 
 }

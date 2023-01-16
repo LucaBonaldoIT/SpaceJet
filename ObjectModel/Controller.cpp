@@ -10,6 +10,7 @@ Controller::Controller()
         {"UP", SDL_SCANCODE_UP},
         {"LEFT", SDL_SCANCODE_LEFT},
         {"RIGHT", SDL_SCANCODE_RIGHT},
+        {"ESC", SDL_SCANCODE_ESCAPE}
         
     };
 
@@ -64,6 +65,16 @@ void Controller::processInput(KeyboardState state)
             {
                 res = res + math::RIGHT_VECTOR_3D;
 
+            }
+            continue;
+        }
+
+        if (key == "ESC")
+        {
+            if (state[value])
+            {
+                auto instance = Engine::getInstance();
+                instance->updateGameState(instance->getCurrentGameState() == GameState::GameRunning ? GameState::GamePaused : GameState::GameRunning);
             }
             continue;
         }
